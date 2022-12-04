@@ -1,0 +1,25 @@
+variant: fcos
+version: 1.4.0
+systemd:
+  units:
+    - name: rpm-ostree-install-ansible-prereqs.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Ansible prereqs with rpm-ostree
+        Wants=network-online.target
+        After=network-online.target
+        # We run before `zincati.service` to avoid conflicting rpm-ostree
+        # transactions.
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/%N.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/rpm-ostree install --apply-live --allow-inactive python3 python3-libselinux
+        ExecStart=/bin/touch /var/lib/%N.stamp
+        ExecStartPost=/usr/bin/systemctl --no-block reboot
+
+        [Install]
+        WantedBy=multi-user.target
