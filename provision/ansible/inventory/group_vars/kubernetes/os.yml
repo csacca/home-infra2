@@ -6,8 +6,8 @@
 # ssh_authorized_keys:
 
 packages:
-  - dnf-plugin-system-upgrade
-  - dnf-utils
+  # - dnf-plugin-system-upgrade
+  # - dnf-utils
   - hdparm
   - htop
   - intel-gpu-tools

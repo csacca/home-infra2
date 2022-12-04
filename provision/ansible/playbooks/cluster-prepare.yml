@@ -28,13 +28,13 @@
     - name: Packages
       block:
         - name: Packages | Install required packages
-          ansible.builtin.dnf:
+          community.general.rpm_ostree_pkg:
             name: "{{ packages | default([]) }}"
             state: present
-            update_cache: true
-        - name: Packages | Remove leaf packages
-          ansible.builtin.dnf:
-            autoremove: true
+            # update_cache: true
+        # - name: Packages | Remove leaf packages
+        #   ansible.builtin.dnf:
+        #     autoremove: true
     - name: User Configuration
       block:
         - name: User Configuration | Add additional SSH public keys
@@ -44,12 +44,12 @@
           loop: "{{ public_ssh_keys | default([]) }}"
     - name: System Configuration (1)
       block:
-        - name: System Configuration (1) | Disable firewalld
-          ansible.builtin.systemd:
-            service: firewalld.service
-            enabled: false
-            masked: true
-            state: stopped
+        # - name: System Configuration (1) | Disable firewalld
+        #   ansible.builtin.systemd:
+        #     service: firewalld.service
+        #     enabled: false
+        #     masked: true
+        #     state: stopped
         - name: System Configuration (1) | Enable fstrim
           ansible.builtin.systemd:
             service: fstrim.timer
@@ -86,7 +86,7 @@
               fs.inotify.max_user_watches: 524288
               fs.inotify.max_user_instances: 512
         - name: System Configuration (2) | Disable swap
-          ansible.builtin.dnf:
+          community.general.rpm_ostree_pkg:
             name: zram-generator-defaults
             state: absent
         - name: System Configuration (2) | Permissive SELinux
