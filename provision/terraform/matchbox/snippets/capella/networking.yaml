@@ -2,29 +2,29 @@ variant: fcos
 version: 1.4.0
 storage:
   files:
-    - path: /etc/NetworkManager/system-connections/enp0s31f6.nmconnection
+    - path: /etc/NetworkManager/system-connections/eno1.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=enp0s31f6
+          id=eno1
           type=ethernet
-          interface-name=enp0s31f6
+          interface-name=eno1
           [ipv4]
-          address1=10.99.1.101/16,10.99.0.1
-          dhcp-hostname=vega
+          address1=10.99.1.102/16,10.99.0.1
+          dhcp-hostname=capella
           dns=10.99.0.1;
           dns-search=mgmt.local
           may-fail=false
           method=manual
-    - path: /etc/NetworkManager/system-connections/enp1s0.nmconnection
+    - path: /etc/NetworkManager/system-connections/enp2s0.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=enp1s0
+          id=enp2s0
           type=ethernet
-          interface-name=enp1s0
+          interface-name=enp2s0
           [ipv4]
           dns-search=
           method=disabled
@@ -32,23 +32,22 @@ storage:
           addr-gen-mode=eui64
           dns-search=
           method=disabled
-    - path: /etc/NetworkManager/system-connections/enp1s0.20.nmconnection
+    - path: /etc/NetworkManager/system-connections/enp2s0.20.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=enp1s0.20
+          id=enp2s0.20
           type=vlan
-          interface-name=enp1s0.20
+          interface-name=enp2s0.20
           [vlan]
           egress-priority-map=
           flags=1
           id=20
           ingress-priority-map=
-          parent=enp1s0
+          parent=enp2s0
           [ipv4]
-          # address1=10.0.20.101/24,10.0.20.1
-          address1=10.0.20.101/24
-          dhcp-hostname=vega-storage
+          address1=10.0.20.102/24
+          dhcp-hostname=capella-storage
           may-fail=false
           method=manual
