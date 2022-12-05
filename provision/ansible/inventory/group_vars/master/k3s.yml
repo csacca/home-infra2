@@ -33,13 +33,14 @@ k3s_server:
   kubelet-arg:
     # Allow k8s services to contain TCP and UDP on the same port
     - "feature-gates=MixedProtocolLBService=true"
-    - "volume-plugin-dir=/var/lib/kubelet/volumeplugins"
+    # - "volume-plugin-dir=/var/lib/kubelet/volumeplugins"
   kube-controller-manager-arg:
     # Allow k8s services to contain TCP and UDP on the same port
     - "feature-gates=MixedProtocolLBService=true"
     # Required to monitor kube-controller-manager with kube-prometheus-stack
     - "bind-address=0.0.0.0"
-    - "flex-volume-plugin-dir=/var/lib/kubelet/volumeplugins/nodeagent~uds"
+    # Required for read-only /usr filesystem in Fedora CoreOS
+    - "flex-volume-plugin-dir=/var/lib/kubernetes/kubelet-plugins/volume/exec"
   kube-proxy-arg:
     # Allow k8s services to contain TCP and UDP on the same port
     - "feature-gates=MixedProtocolLBService=true"
