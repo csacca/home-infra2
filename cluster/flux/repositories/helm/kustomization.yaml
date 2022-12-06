@@ -13,6 +13,7 @@ resources:
   - ./kubereboot-charts.yaml
   - ./k8s-at-home.yaml
   - ./k8s-gateway-charts.yaml
+  - ./k8snetworkplumbingwg-helm-charts.yaml
   - ./metallb-charts.yaml
   - ./metrics-server-charts.yaml
   - ./rook-ceph-charts.yaml
