@@ -1,0 +1,21 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JJGadgets/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: whereabouts
+  namespace: network
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: whereabouts
+      sourceRef:
+        kind: GitRepository
+        name: k8snetworkplumbingwg-helm-charts
+        namespace: flux-system
+      interval: 30m
+  values:
+    image:
+      repository: ghcr.io/k8snetworkplumbingwg/whereabouts
+      tag: v0.6-amd64
