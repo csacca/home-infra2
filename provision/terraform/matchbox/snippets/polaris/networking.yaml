@@ -17,6 +17,8 @@ storage:
           dns-search=mgmt.local
           may-fail=false
           method=manual
+          [ipv6]
+          method=disabled
     - path: /etc/NetworkManager/system-connections/eno3.nmconnection
       mode: 0600
       contents:
@@ -24,13 +26,14 @@ storage:
           [connection]
           id=eno3
           type=ethernet
+          autoconnect-priority=-999
           interface-name=eno3
+          [ethernet]
+          mtu=9000
           [ipv4]
-          dns-search=
           method=disabled
           [ipv6]
-          addr-gen-mode=eui64
-          dns-search=
+          addr-gen-mode=default
           method=disabled
     - path: /etc/NetworkManager/system-connections/eno3.20.nmconnection
       mode: 0600
@@ -40,14 +43,28 @@ storage:
           id=eno3.20
           type=vlan
           interface-name=eno3.20
+          master=br-storage
+          slave-type=bridge
+          [ethernet]
+          mtu=9000
           [vlan]
-          egress-priority-map=
           flags=1
           id=20
-          ingress-priority-map=
           parent=eno3
+    - path: /etc/NetworkManager/system-connections/br-storage.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=br-storage
+          type=bridge
+          interface-name=br-storage
+          [bridge]
+          stp=false
           [ipv4]
           address1=10.0.20.100/24
           dhcp-hostname=polaris-storage
           may-fail=false
           method=manual
+          [ipv6]
+          method=disabled

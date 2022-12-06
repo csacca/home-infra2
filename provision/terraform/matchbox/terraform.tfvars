@@ -1,6 +1,6 @@
 matchbox_http_endpoint = "http://matchbox.example.com:8080"
 matchbox_rpc_endpoint  = "matchbox.example.com:8081"
-os_version             = "36.20221030.3.0"
+os_version             = "37.20221106.3.0"
 ssh_authorized_key     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB9l8cv+eDVeYsuERyNX+kM93ajTuRNxJnpdKWAmkqoe"
 
 cluster_name = "galaxy"
