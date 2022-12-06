@@ -4,4 +4,6 @@ kind: Kustomization
 resources:
   - ./default
   - ./kube-system
+  - ./network
+  # - ./storage
   # - ./system-upgrade
