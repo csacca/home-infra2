@@ -10,3 +10,21 @@ spec:
   url: https://github.com/k8snetworkplumbingwg/whereabouts.git
   ref:
     tag: v0.6
+  ignore: |
+    # exclude all
+    /*
+    # include crd directory
+    !/doc/crds
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: k8snetworkplumbingwg-whereabouts-crds
+  namespace: network
+spec:
+  interval: 30m
+  prune: false
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: k8snetworkplumbingwg-whereabouts
