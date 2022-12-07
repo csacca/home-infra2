@@ -28,3 +28,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: k8snetworkplumbingwg-whereabouts
+    namespace: flux-system
