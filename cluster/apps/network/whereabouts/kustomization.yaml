@@ -1,5 +1,15 @@
 ---
-apiVersion: kustomize.config.k8s.io/v1beta1
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JJGadgets/flux2-schemas/main/kustomization-kustomize-v1beta2.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
-resources:
-  - ./helm-release.yaml
+metadata:
+  name: whereabouts
+  namespace: network
+spec:
+  interval: 10m
+  targetNamespace: network
+  sourceRef:
+    kind: GitRepository
+    name: k8snetworkplumbingwg-whereabouts
+  path: "./doc/crds/"
+  prune: true

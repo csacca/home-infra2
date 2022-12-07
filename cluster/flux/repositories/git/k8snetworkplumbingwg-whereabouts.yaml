@@ -3,10 +3,10 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  name: k8snetworkplumbingwg-helm-charts
+  name: k8snetworkplumbingwg-whereabouts
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/k8snetworkplumbingwg/helm-charts.git
+  url: https://github.com/k8snetworkplumbingwg/whereabouts.git
   ref:
-    branch: master
+    tag: v0.6
