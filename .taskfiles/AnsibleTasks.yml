@@ -43,6 +43,13 @@ tasks:
       - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-nuke.yml
       - task: reboot
 
+  rook-nuke:
+    desc: Uninstall Rook-Ceph on the nodes
+    dir: provision/ansible
+    interactive: true
+    cmds:
+      - ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-rook-nuke.yml
+
   ping:
     desc: Ping all the hosts
     dir: provision/ansible

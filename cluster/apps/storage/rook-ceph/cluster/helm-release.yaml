@@ -1,0 +1,131 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JJGadgets/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rook-ceph-cluster
+  namespace: rook-ceph
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.rook.io/release
+      chart: rook-ceph-cluster
+      version: v1.10.7
+      sourceRef:
+        kind: HelmRepository
+        name: rook-ceph-charts
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  dependsOn:
+    - name: rook-ceph-operator
+      namespace: rook-ceph
+  values:
+    monitoring:
+      enabled: true
+      createPrometheusRules: true
+    ingress:
+      dashboard:
+        ingressClassName: "nginx"
+        host:
+          name: &host "rook.${SECRET_PUBLIC_DOMAIN}"
+          path: /
+        tls:
+          - hosts:
+              - *host
+    configOverride: |
+      [global]
+      bdev_enable_discard = true
+      bdev_async_discard = true
+    cephClusterSpec:
+      network:
+        provider: multus
+        selectors:
+          cluster: rook-ceph/storage-network
+      crashCollector:
+        disable: false
+      dashboard:
+        enabled: true
+        urlPrefix: /
+        ssl: false
+      storage:
+        useAllNodes: false
+        useAllDevices: false
+        config:
+          osdsPerDevice: "1"
+        nodes:
+          - name: polaris
+            devices:
+              - name: "/dev/disk/by-id/scsi-SATA_HGST_HDN726040AL_K7J8YWUL"
+              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD4003FFBX-6_VBG8RTPR"
+              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD40EFRX-68N_WD-WCC7K4PCKY5A"
+              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD40EFRX-68W_WD-WCC4E0CPLY9Y"
+              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD40EFRX-68W_WD-WCC4E6TZH5LD"
+          - name: capella
+            devices:
+              - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCJ6J386"
+              - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCK93HWK"
+    cephBlockPools:
+      - name: ceph-blockpool
+        spec:
+          failureDomain: osd
+          replicated:
+            size: 3
+        storageClass:
+          enabled: true
+          name: ceph-block
+          isDefault: true
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          parameters:
+            imageFormat: "2"
+            imageFeatures: layering
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+            csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+            csi.storage.k8s.io/fstype: ext4
+    cephFileSystems:
+      - name: ceph-filesystem
+        spec:
+          metadataPool:
+            - failureDomain: osd
+              replicated:
+                size: 3
+          dataPools:
+            - failureDomain: osd
+              replicated:
+                size: 3
+              name: data0
+          metadataServer:
+            activeCount: 1
+            activeStandby: true
+            resources:
+              requests:
+                cpu: 1000m
+                memory: 4Gi
+              limits:
+                memory: 4Gi
+        storageClass:
+          enabled: true
+          isDefault: false
+          name: ceph-filesystem
+          pool: data0
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          parameters:
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+            csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+            csi.storage.k8s.io/fstype: ext4
