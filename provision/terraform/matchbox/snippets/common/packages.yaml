@@ -20,7 +20,7 @@ systemd:
 
         Environment=K3S_KUBECONFIG_MODE="644"
 
-        ExecStart=/usr/bin/rpm-ostree install --apply-live --allow-inactive python3 python3-libselinux terminus-fonts
+        ExecStart=/usr/bin/rpm-ostree install --apply-live --allow-inactive python3 python3-libselinux terminus-fonts-console
 
         # k3s-selinux rancher package
         ExecStart=timeout 20s bash -c 'until ping -c1 -q github.com > /dev/null 2>&1 ; do echo "Not reachable! Retrying in 2 seconds!" ; sleep 2s ; done'
