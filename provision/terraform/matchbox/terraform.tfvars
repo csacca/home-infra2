@@ -28,18 +28,24 @@ nodes = [
 
 snippets = {
   "polaris" = [
+    "./snippets/common/mitigations.yaml",
     "./snippets/common/autologin.yaml",
     "./snippets/common/packages.yaml",
+    "./snippets/common/console-font.yaml",
     "./snippets/polaris/networking.yaml"
   ],
   "vega" = [
+    "./snippets/common/mitigations.yaml",
     "./snippets/common/autologin.yaml",
     "./snippets/common/packages.yaml",
+    "./snippets/common/console-font.yaml",
     "./snippets/vega/networking.yaml"
   ],
   "capella" = [
+    "./snippets/common/mitigations.yaml",
     "./snippets/common/autologin.yaml",
     "./snippets/common/packages.yaml",
+    "./snippets/common/console-font.yaml",
     "./snippets/capella/networking.yaml"
   ]
 

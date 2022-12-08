@@ -1,0 +1,11 @@
+---
+variant: fcos
+version: 1.4.0
+storage:
+  files:
+    - path: /etc/vconsole.conf
+      mode: 0644
+      contents:
+        inline: |
+          # use larger terminus font
+          FONT=ter-132n
