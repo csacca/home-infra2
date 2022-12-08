@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: network
+  name: monitoring
   labels:
     kustomize.toolkit.fluxcd.io/prune: enable
     goldilocks.fairwinds.com/enabled: "true"
