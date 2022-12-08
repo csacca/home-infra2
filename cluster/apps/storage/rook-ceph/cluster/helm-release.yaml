@@ -97,9 +97,9 @@ spec:
       - name: ceph-filesystem
         spec:
           metadataPool:
-            - failureDomain: osd
-              replicated:
-                size: 3
+            failureDomain: osd
+            replicated:
+              size: 3
           dataPools:
             - failureDomain: osd
               replicated:
