@@ -19,6 +19,37 @@ storage:
           method=manual
           [ipv6]
           method=disabled
+    - path: /etc/NetworkManager/system-connections/eno1.50.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=eno1.50
+          type=vlan
+          interface-name=eno1.50
+          master=br-storage
+          slave-type=bridge
+          [vlan]
+          flags=1
+          id=50
+          parent=eno1
+    - path: /etc/NetworkManager/system-connections/br-vlan50.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=br-storage
+          type=bridge
+          interface-name=br-vlan50
+          [bridge]
+          stp=false
+          [ipv4]
+          address1=10.0.50.100/24
+          dhcp-hostname=polaris-vlan50
+          may-fail=false
+          method=manual
+          [ipv6]
+          method=disabled
     - path: /etc/NetworkManager/system-connections/eno3.nmconnection
       mode: 0600
       contents:
