@@ -71,6 +71,28 @@ spec:
             devices:
               - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCJ6J386"
               - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCK93HWK"
+      resources:
+        mgr:
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+        mon:
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+        osd:
+          limits:
+            cpu: "2000m"
+            memory: "4Gi"
+          requests:
+            cpu: "500m"
+            memory: "4Gi"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
