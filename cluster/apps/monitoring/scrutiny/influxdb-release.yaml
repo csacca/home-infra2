@@ -62,6 +62,9 @@ spec:
         enabled: true
         mountPath: /var/lib/influxdb2
         # existingClaim: scrutiny-data
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 1Gi
         subPath: scrutiny_influxdb
 
     resources:
