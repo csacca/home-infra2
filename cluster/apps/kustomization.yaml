@@ -5,6 +5,6 @@ resources:
   - ./default
   - ./kube-system
   - ./monitoring
-  # - ./network
-  # - ./storage
+  - ./network.yaml
+  - ./storage.yaml
   # - ./system-upgrade
