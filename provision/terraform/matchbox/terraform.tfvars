@@ -31,7 +31,7 @@ snippets = {
     "./snippets/common/mitigations.yaml",
     "./snippets/common/autologin.yaml",
     "./snippets/common/packages.yaml",
-    "./snippets/common/console-font.yaml",
+    # "./snippets/common/console-font.yaml",
     "./snippets/polaris/networking.yaml"
   ],
   "vega" = [
