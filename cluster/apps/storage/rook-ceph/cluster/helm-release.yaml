@@ -51,7 +51,6 @@ spec:
       bdev_enable_discard = true
       bdev_async_discard = true
       bluefs_buffered_io = false
-
     cephClusterSpec:
       network:
         provider: multus
