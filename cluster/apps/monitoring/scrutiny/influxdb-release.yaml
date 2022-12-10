@@ -59,13 +59,10 @@ spec:
 
     persistence:
       data:
-        enabled: true
-        mountPath: /var/lib/influxdb2
+        enabled: false
+        # mountPath: /var/lib/influxdb2
         # existingClaim: scrutiny-data
-        type: pvc
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        subPath: scrutiny_influxdb
+        # subPath: scrutiny_influxdb
 
     resources:
       requests:

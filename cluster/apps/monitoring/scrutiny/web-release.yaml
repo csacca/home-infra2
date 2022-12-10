@@ -86,13 +86,10 @@ spec:
 
     persistence:
       config:
-        enabled: true
+        enabled: false
         # existingClaim: scrutiny-data
-        type: pvc
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        mountPath: /opt/scrutiny/config
-        subPath: scrutiny
+        # mountPath: /opt/scrutiny/config
+        # subPath: scrutiny
 
     resources:
       requests:
