@@ -23,6 +23,16 @@
             sgdisk --zap-all {{ item }} || true
           loop:
             - "{{ rook_devices | default([]) }}"
+        - name: Zeroize the drives # noqa
+          ansible.builtin.shell: |-
+            dd if=/dev/zero of="{{ item }}" bs=1M count=2048 oflag=direct,dsync || true
+          loop:
+            - "{{ rook_devices | default([]) }}"
+        - name: blkdiscard  the drives # noqa
+          ansible.builtin.shell: |-
+            blkdiscard {{ item }} || true
+          loop:
+            - "{{ rook_devices | default([]) }}"
         - name: Remove lvm partitions # noqa
           ansible.builtin.shell: |-
             {{ item }}
@@ -36,3 +46,11 @@
             wipefs --all --force {{ item }}
           with_items:
             - "{{ rook_devices | default([]) }}"
+        # - name: partprobe # noqa
+        #   ansible.builtin.command: |-
+        #     partprobe {{ item }}
+        #   with_items:
+        #     - "{{ rook_devices | default([]) }}"
+        - name: Reboot
+          ansible.builtin.reboot:
+            msg: Rebooting nodes
