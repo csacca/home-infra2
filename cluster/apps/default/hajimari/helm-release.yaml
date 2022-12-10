@@ -28,6 +28,8 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - storage
+          - monitoring
       name: "you"
       customApps:
         - name: Some External Cluster Service
