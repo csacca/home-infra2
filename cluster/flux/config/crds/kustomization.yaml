@@ -5,4 +5,3 @@ namespace: flux-system
 resources:
   - ./network-attachment-definition.yaml
   - ./kube-prometheus-stack.yaml
-  - ./rook-ceph-crds.yaml
