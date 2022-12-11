@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: ./kubernetes/apps/databases/cloudnative-pg/operator
+  path: ./cluster/apps/databases/cloudnative-pg/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -26,7 +26,7 @@ spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg-operator
   interval: 10m
-  path: ./kubernetes/apps/default/cloudnative-pg/config
+  path: ./cluster/apps/default/cloudnative-pg/config
   prune: true
   sourceRef:
     kind: GitRepository
