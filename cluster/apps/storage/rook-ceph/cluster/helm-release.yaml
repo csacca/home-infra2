@@ -205,15 +205,3 @@ spec:
           reclaimPolicy: Delete
           parameters:
             region: us-east-1
----
-apiVersion: ceph.rook.io/v1
-kind: CephBlockPool
-metadata:
-  name: builtin-mgr
-  namespace: rook-ceph
-spec:
-  name: .mgr
-  failureDomain: osd
-  replicated:
-    size: 3
-    requireSafeReplicaSize: true
