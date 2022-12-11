@@ -28,7 +28,7 @@ spec:
       namespaceSelector:
         matchNames:
           - default
-          - storage
+          - rook-ceph
           - monitoring
       name: "you"
       customApps:
