@@ -19,36 +19,22 @@ storage:
           method=manual
           [ipv6]
           method=disabled
-    - path: /etc/NetworkManager/system-connections/eno1.50.nmconnection
+    - path: /etc/NetworkManager/system-connections/vlan50.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=eno1.50
+          id=vlan50
           type=vlan
-          interface-name=eno1.50
-          master=br-vlan50
-          slave-type=bridge
+          interface-name=vlan50
           [vlan]
           flags=1
           id=50
           parent=eno1
-    - path: /etc/NetworkManager/system-connections/br-vlan50.nmconnection
-      mode: 0600
-      contents:
-        inline: |
-          [connection]
-          id=br-vlan50
-          type=bridge
-          interface-name=br-vlan50
-          [bridge]
-          stp=false
           [ipv4]
-          address1=10.0.50.102/24
-          dhcp-hostname=capella-vlan50
-          may-fail=false
-          method=manual
+          method=disabled
           [ipv6]
+          addr-gen-mode=default
           method=disabled
     - path: /etc/NetworkManager/system-connections/enp2s0.nmconnection
       mode: 0600
@@ -66,36 +52,22 @@ storage:
           [ipv6]
           addr-gen-mode=default
           method=disabled
-    - path: /etc/NetworkManager/system-connections/enp2s0.20.nmconnection
+    - path: /etc/NetworkManager/system-connections/vlan20.nmconnection
       mode: 0600
       contents:
         inline: |
           [connection]
-          id=enp2s0.20
+          id=vlan20
           type=vlan
-          interface-name=enp2s0.20
-          master=br-storage
-          slave-type=bridge
+          interface-name=vlan20
           [ethernet]
           mtu=9000
           [vlan]
           flags=1
           id=20
           parent=enp2s0
-    - path: /etc/NetworkManager/system-connections/br-storage.nmconnection
-      mode: 0600
-      contents:
-        inline: |
-          [connection]
-          id=br-storage
-          type=bridge
-          interface-name=br-storage
-          [bridge]
-          stp=false
           [ipv4]
-          address1=10.0.20.102/24
-          dhcp-hostname=capella-storage
-          may-fail=false
-          method=manual
+          method=disabled
           [ipv6]
+          addr-gen-mode=default
           method=disabled

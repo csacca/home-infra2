@@ -16,7 +16,7 @@ spec:
       labels:
         app: rook-direct-mount
       annotations:
-        k8s.v1.cni.cncf.io/networks: storage-network
+        k8s.v1.cni.cncf.io/networks: rook-ceph/storage-network
     spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
