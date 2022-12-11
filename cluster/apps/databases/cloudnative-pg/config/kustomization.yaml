@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: databases
 resources:
   - ./cluster.yaml
-  - ./secret.sops.yaml
+  - ./secrets.sops.yaml
