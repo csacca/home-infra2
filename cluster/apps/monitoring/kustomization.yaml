@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./goldilocks
   # - ./grafana
+  - ./kube-prometheus-stack/ks.yaml
   # - ./smartctl-exporter
   - ./scrutiny
   - ./vpa
