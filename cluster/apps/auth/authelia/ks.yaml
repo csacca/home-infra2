@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: ./kubernetes/apps/auth/authelia/app
+  path: ./cluster/apps/auth/authelia/app
   prune: true
   sourceRef:
     kind: GitRepository
