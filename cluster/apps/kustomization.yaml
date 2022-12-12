@@ -6,6 +6,7 @@ resources:
   - ./databases
   - ./default
   - ./kube-system
+  - ./kyverno
   - ./monitoring
   - ./network
   - ./storage
