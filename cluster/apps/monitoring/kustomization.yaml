@@ -7,5 +7,6 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   # - ./smartctl-exporter
   - ./scrutiny
+  - ./thanos/ks.yaml
   - ./vpa
   - ./namespace.yaml
