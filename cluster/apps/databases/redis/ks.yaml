@@ -10,6 +10,9 @@ spec:
   interval: 10m
   path: ./cluster/apps/databases/redis/app
   prune: true
+  dependsOn:
+    - name: cluster-apps-storage-rook-ceph-config
+      namespace: rook-ceph
   sourceRef:
     kind: GitRepository
     name: flux-cluster
