@@ -20,6 +20,10 @@ access_control:
     - domain: ["grafana.${SECRET_DOMAIN}"]
       policy: bypass
 
+    - domain: "*.${SECRET_DOMAIN}"
+      policy: one_factor
+      networks: ["internal"]
+
 identity_providers:
   oidc:
     cors:
