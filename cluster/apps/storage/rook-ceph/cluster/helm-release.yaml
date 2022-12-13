@@ -66,6 +66,8 @@ spec:
         modules:
           - name: rook
             enabled: true
+          - name: pg_autoscaler
+            enable: true
 
       storage:
         useAllNodes: false
