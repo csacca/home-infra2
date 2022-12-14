@@ -64,6 +64,7 @@ spec:
         org_name: HomeOps
         org_id: 1
         org_role: Viewer
+
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
@@ -76,6 +77,7 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
+
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -88,22 +90,14 @@ spec:
             access: proxy
             url: http://thanos-query.monitoring.svc.cluster.local:9090
             isDefault: true
-          # - name: Loki
-          #   type: loki
-          #   access: proxy
-          #   url: http://loki-gateway.monitoring.svc.cluster.local:80
-    # dashboards:
-    #   default:
-    #     # Ref: https://grafana.com/grafana/dashboards/7845
-    #     zfs:
-    #       gnetId: 7845
-    #       revision: 4
-    #       datasource: Prometheus
-    #     # Ref: https://grafana.com/grafana/dashboards/13502
-    #     minio:
-    #       gnetId: 13502
-    #       revision: 10
-    #       datasource: Prometheus
+
+    dashboards:
+      default:
+        node-exporter-full:
+          datasource: Prometheus
+          url: https://grafana.com/api/dashboards/1860/revisions/22/download
+
+
     sidecar:
       dashboards:
         enabled: true
@@ -121,6 +115,7 @@ spec:
       - vonage-status-panel
       - grafana-worldmap-panel
       - grafana-clock-panel
+
     serviceMonitor:
       enabled: true
     ingress:
