@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-shell-capella
+  namespace: kube-system
+spec:
+  nodeName: capella
+  terminationGracePeriodSeconds: 5
+  volumes:
+    - name: device-dir
+      hostPath:
+        path: /dev
+  containers:
+    - name: shell
+      image: ubuntu
+      tty: true
+      stdin: true
+      securityContext:
+        privileged: true
+      resources:
+        limits:
+          cpu: 2000m
+          memory: 4G
+      volumeMounts:
+        - name: device-dir
+          mountPath: /dev
+
+# kubectl exec --stdin --tty ubuntu-shell-polaris -- /bin/bash

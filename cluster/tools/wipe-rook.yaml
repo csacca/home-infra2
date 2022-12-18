@@ -1,0 +1,115 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: disk-wipe-polaris
+  namespace: kube-system
+  labels:
+    job-type: disk-wipe
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      nodeName: polaris
+      restartPolicy: Never
+      volumes:
+        - name: device-dir
+          hostPath:
+            path: /dev
+      containers:
+        - name: disk-wipe
+          image: ubuntu
+          securityContext:
+            privileged: true
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 4G
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+          command: [
+            "/bin/sh",
+            "-c",
+
+            "apt update && \
+            apt install fdisk gdisk parted udev -y && \
+            DEVICE=/dev/disk/by-id/ata-HGST_HDN726040ALE614_K7J8YWUL && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE && \
+
+            DEVICE=/dev/disk/by-id/ata-WDC_WD4003FFBX-68MU3N0_VBG8RTPR && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE && \
+
+            DEVICE=/dev/disk/by-id/ata-WDC_WD40EFRX-68N32N0_WD-WCC7K4PCKY5A && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE && \
+
+            DEVICE=/dev/disk/by-id/ata-WDC_WD40EFRX-68WT0N0_WD-WCC4E0CPLY9Y && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE && \
+
+            DEVICE=/dev/disk/by-id/ata-WDC_WD40EFRX-68WT0N0_WD-WCC4E6TZH5LD && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE",
+          ]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: disk-wipe-capella
+  namespace: kube-system
+  labels:
+    job-type: disk-wipe
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      nodeName: capella
+      restartPolicy: Never
+      volumes:
+        - name: device-dir
+          hostPath:
+            path: /dev
+      containers:
+        - name: disk-wipe
+          image: ubuntu
+          securityContext:
+            privileged: true
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 4G
+          volumeMounts:
+            - name: device-dir
+              mountPath: /dev
+          command: [
+            "/bin/sh",
+            "-c",
+
+            "apt update && \
+            apt install fdisk gdisk parted udev -y && \
+
+            DEVICE=/dev/disk/by-id/ata-ST4000LM024-2AN17V_WCJ6J386 && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE && \
+
+            DEVICE=/dev/disk/by-id/ata-ST4000LM024-2AN17V_WCK93HWK && \
+            sgdisk --zap-all $DEVICE && \
+            dd if=/dev/zero of=$DEVICE bs=4096k count=100 oflag=direct,dsync && \
+            wipefs -af $DEVICE && \
+            partprobe $DEVICE",
+          ]
