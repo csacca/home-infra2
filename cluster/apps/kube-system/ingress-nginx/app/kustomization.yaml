@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./helm-release.yaml
-  - ./dashboard
+  - ./certificate.yaml
+  - ./dashboard/
 configMapGenerator:
   - name: cloudflare-proxied-networks
     files:
