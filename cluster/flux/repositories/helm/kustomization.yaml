@@ -21,7 +21,6 @@ resources:
   - ./k8s-at-home.yaml
   - ./k8s-gateway-charts.yaml
   - ./metallb-charts.yaml
-  - ./metrics-server-charts.yaml
   - ./postfinance-charts.yaml
   - ./prometheus-community-charts.yaml
   - ./rook-ceph-charts.yaml
