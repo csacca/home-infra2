@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: "./cluster/apps/cert-manager/cert-manager/app"
+  path: "./cluster/apps/kube-system/cert-manager/app"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -24,7 +24,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: "./cluster/apps/cert-manager/cert-manager/issuers"
+  path: "./cluster/apps/kube-system/cert-manager/issuers"
   prune: true
   sourceRef:
     kind: GitRepository
