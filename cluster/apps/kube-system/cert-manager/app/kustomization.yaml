@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./helm-release.yaml
-  - ./issuers
 configMapGenerator:
   - name: cert-manager-dashboard
     files:
