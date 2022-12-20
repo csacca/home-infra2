@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: "./cluster/apps/kube-system/cilium/app"
+  path: "./cluster/apps/network/cilium/app"
   prune: true
   sourceRef:
     kind: GitRepository

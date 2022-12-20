@@ -8,6 +8,6 @@ resources:
   - ./kube-system
   - ./kyverno
   # - ./monitoring
-  # - ./network
+  - ./network
   # - ./storage
   # - ./system-upgrade
