@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: k8s-gateway
-  namespace: kube-system
+  namespace: network
 spec:
   interval: 15m
   chart:
@@ -12,26 +12,23 @@ spec:
       version: 2.0.0
       sourceRef:
         kind: HelmRepository
-        name: k8s-gateway
+        name: k8s-gateway-charts
         namespace: flux-system
       interval: 15m
   install:
-    createNamespace: true
     remediation:
       retries: 5
   upgrade:
     remediation:
       retries: 5
-  dependsOn:
-    - name: metallb
-      namespace: kube-system
   values:
     fullnameOverride: k8s-gateway
     domain: ${SECRET_DOMAIN}
     ttl: 1
     service:
+      annotations:
+        reloader.stakater.com/auto: "true"
       type: LoadBalancer
       port: 53
-      annotations:
-        metallb.universe.tf/loadBalancerIPs: "${METALLB_K8S_GATEWAY_ADDR}"
+      loadBalancerIP: "${SVC_K8S_GATEWAY_ADDRESS}"
       externalTrafficPolicy: Local

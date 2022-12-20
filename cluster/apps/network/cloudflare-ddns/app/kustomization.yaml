@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./cron-job.yaml
   - ./secret.sops.yaml
-namespace: kube-system
+namespace: network
 configMapGenerator:
   - name: cloudflare-ddns
     files:
