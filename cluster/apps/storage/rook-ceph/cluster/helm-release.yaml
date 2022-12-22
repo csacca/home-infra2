@@ -55,7 +55,7 @@ spec:
       network:
         provider: multus
         selectors:
-          cluster: rook-ceph/storage-network
+          cluster: network/multus-vlan20
       crashCollector:
         disable: false
       dashboard:
@@ -122,6 +122,7 @@ spec:
           limits:
             cpu: 800m
             memory: 1G
+
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -144,18 +145,27 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
+
     cephFileSystems:
-      - name: ceph-filesystem
+      - name: ceph-fs
         spec:
           metadataPool:
-            failureDomain: osd
             replicated:
               size: 3
+            failureDomain: osd
+
           dataPools:
-            - failureDomain: osd
+            - name: ceph-fs-default
               replicated:
-                size: 3
-              name: data0
+              size: 3
+              failureDomain: osd
+
+            - name: ceph-fs-ec
+              erasureCoded:
+                dataChunks: 3
+                codingChunks: 2
+              failureDomain: osd
+
           metadataServer:
             activeCount: 1
             activeStandby: true
@@ -166,11 +176,12 @@ spec:
               limits:
                 cpu: 1600m
                 memory: 2G
+
         storageClass:
           enabled: true
           isDefault: false
-          name: ceph-filesystem
-          pool: data0
+          name: ceph-fs
+          pool: ceph-fs-ec
           reclaimPolicy: Delete
           allowVolumeExpansion: true
           parameters:
@@ -181,6 +192,7 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
+
     cephObjectStores:
       - name: ceph-objectstore
         spec:
@@ -191,8 +203,8 @@ spec:
           dataPool:
             failureDomain: osd
             erasureCoded:
-              dataChunks: 2
-              codingChunks: 1
+              dataChunks: 5
+              codingChunks: 3
           preservePoolsOnDelete: true
           gateway:
             port: 80
