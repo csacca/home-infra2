@@ -17,6 +17,8 @@ includes:
   ansible: .taskfiles/AnsibleTasks.yml
   cluster: .taskfiles/ClusterTasks.yml
   precommit: .taskfiles/PrecommitTasks.yml
+  pxe: .taskfiles/PXETasks.yml
+  talos: .taskfiles/TalosTasks.yml
   terraform: .taskfiles/TerraformTasks.yml
   rook: .taskfiles/RookTasks.yml
   sops: .taskfiles/SopsTasks.yml
