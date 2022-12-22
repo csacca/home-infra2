@@ -1,0 +1,167 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nads-cni-config
+  namespace: kube-system
+data:
+  multus-vlan20-polaris.json: |
+    {
+      "cniVersion": "0.3.1",
+      "name": "multus-vlan20",
+      "type": "macvlan",
+      "mode": "bridge",
+      "master": "eth2.20",
+      "mtu": 9000,
+      "ipam": {
+          "type": "whereabouts",
+          "range": "10.0.20.0/24",
+          "exclude": [
+            "10.0.20.0/28",
+            "10.0.20.100/28",
+            "10.0.20.254/32"
+          ]
+      }
+    }
+
+  multus-vlan20-default.json: |
+    {
+      "cniVersion": "0.3.1",
+      "name": "multus-vlan20",
+      "type": "macvlan",
+      "mode": "bridge",
+      "master": "eth1.20",
+      "mtu": 9000,
+      "ipam": {
+          "type": "whereabouts",
+          "range": "10.0.20.0/24",
+          "exclude": [
+            "10.0.20.0/28",
+            "10.0.20.100/28",
+            "10.0.20.254/32"
+          ]
+      }
+    }
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deploy-nad-polaris
+  namespace: kube-system
+  labels:
+    job-type: deploy-nad
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      nodeName: polaris
+      restartPolicy: Never
+      containers:
+        - name: deploy-nad-polaris
+          command:
+            ["/bin/ash", "-c", "mkdir -p /host/etc/cni/multus/net.d/; cp /tmp/nads-conf/* /host/etc/cni/multus/net.d/"]
+          image: alpine
+          resources:
+            limits:
+              memory: 256M
+          volumeMounts:
+            - name: cni
+              mountPath: /host/etc/cni
+            - name: nads-cfg
+              mountPath: /tmp/nads-conf
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: cni
+          hostPath:
+            path: /etc/cni
+        - name: nads-cfg
+          configMap:
+            name: nads-cni-config
+            items:
+              - key: multus-vlan20-polaris.json
+                path: multus-vlan20.conf
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deploy-nad-vega
+  namespace: kube-system
+  labels:
+    job-type: deploy-nad
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      nodeName: vega
+      restartPolicy: Never
+      containers:
+        - name: deploy-nad-vega
+          command:
+            ["/bin/ash", "-c", "mkdir -p /host/etc/cni/multus/net.d/; cp /tmp/nads-conf/* /host/etc/cni/multus/net.d/"]
+          image: alpine
+          resources:
+            limits:
+              memory: 256M
+          volumeMounts:
+            - name: cni
+              mountPath: /host/etc/cni
+            - name: nads-cfg
+              mountPath: /tmp/nads-conf
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: cni
+          hostPath:
+            path: /etc/cni
+        - name: nads-cfg
+          configMap:
+            name: nads-cni-config
+            items:
+              - key: multus-vlan20-default.json
+                path: multus-vlan20.conf
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deploy-nad-capella
+  namespace: kube-system
+  labels:
+    job-type: deploy-nad
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      nodeName: capella
+      restartPolicy: Never
+      containers:
+        - name: deploy-nad-capella
+          command:
+            ["/bin/ash", "-c", "mkdir -p /host/etc/cni/multus/net.d/; cp /tmp/nads-conf/* /host/etc/cni/multus/net.d/"]
+          image: alpine
+          resources:
+            limits:
+              memory: 256M
+          volumeMounts:
+            - name: cni
+              mountPath: /host/etc/cni
+            - name: nads-cfg
+              mountPath: /tmp/nads-conf
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: cni
+          hostPath:
+            path: /etc/cni
+        - name: nads-cfg
+          configMap:
+            name: nads-cni-config
+            items:
+              - key: multus-vlan20-default.json
+                path: multus-vlan20.conf
+
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: multus-vlan20
+  namespace: network
