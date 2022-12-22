@@ -1,0 +1,74 @@
+---
+version: "3"
+
+tasks:
+  help:
+    desc: AmtPower help
+    cmds:
+      - |
+        docker run -it --rm \
+        docker.io/polymathrobotics/meshcmd \
+        help amtpower
+
+  polaris:
+    desc: Reboot polaris to pxe via ipmitool
+    silent: true
+    vars:
+      HOST:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.polaris.hostname' -
+      USERNAME:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.polaris.username' -
+      PASSWORD:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.polaris.password' -
+    cmds:
+      - ipmitool -H {{.HOST}} -U {{.USERNAME}} -I lanplus -P {{.PASSWORD}} chassis bootdev pxe options=efiboot
+      - ipmitool -H {{.HOST}} -U {{.USERNAME}} -I lanplus -P {{.PASSWORD}} power reset
+
+  vega:
+    desc: Reboot vega to pxe via intel amt
+    silent: true
+    vars:
+      HOST:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.vega.hostname' -
+      USERNAME:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.vega.username' -
+      PASSWORD:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.vega.password' -
+    cmds:
+      - |
+        docker run -it --rm \
+        docker.io/polymathrobotics/meshcmd \
+        amtpower \
+        --reset \
+        --host {{.HOST}} \
+        --user {{.USERNAME}} \
+        --password {{.PASSWORD}} \
+        --bootdevice pxe
+
+  capella:
+    desc: Reboot capella to pxe via intel amt
+    silent: true
+    vars:
+      HOST:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.capella.hostname' -
+      USERNAME:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.capella.username' -
+      PASSWORD:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.capella.password' -
+    cmds:
+      - |
+        docker run -it --rm \
+        docker.io/polymathrobotics/meshcmd \
+        amtpower \
+        --reset \
+        --host {{.HOST}} \
+        --user {{.USERNAME}} \
+        --password {{.PASSWORD}} \
+        --bootdevice pxe
+
+  all:
+    desc: pxe boot all nodes
+    cmds:
+      - task: polaris
+      - task: vega
+      - task: capella
