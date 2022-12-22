@@ -25,6 +25,8 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-storage-rook-ceph-operator
+    - name: cluster-apps-multus-config
+      namespace: network
   interval: 10m
   path: ./cluster/apps/storage/rook-ceph/cluster
   prune: true
