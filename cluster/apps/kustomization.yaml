@@ -9,5 +9,5 @@ resources:
   - ./kyverno
   # - ./monitoring
   - ./network
-  - ./storage
+  # - ./storage
   # - ./system-upgrade
