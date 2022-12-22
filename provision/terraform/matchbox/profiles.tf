@@ -1,25 +1,21 @@
 locals {
-  # tflint-ignore: terraform_unused_declarations
-  cached_kernel = "/assets/fedora-coreos/fedora-coreos-${var.os_version}-live-kernel-x86_64"
-  # tflint-ignore: terraform_unused_declarations
-  cached_initrd = [
-  "--name main /assets/fedora-coreos/fedora-coreos-${var.os_version}-live-initramfs.x86_64.img"]
 
-  # tflint-ignore: terraform_unused_declarations
-  cached_args = [
-    "initrd=main",
-    "coreos.live.rootfs_url=${var.matchbox_http_endpoint}/assets/fedora-coreos/fedora-coreos-${var.os_version}-live-rootfs.x86_64.img",
-    "coreos.inst.ignition_url=${var.matchbox_http_endpoint}/ignition?uuid=$${uuid}&mac=$${mac:hexhyp}",
-  ]
-
-  remote_kernel = "https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-kernel-x86_64"
+  remote_kernel = "https://github.com/siderolabs/talos/releases/download/${var.talos_version}/vmlinuz-amd64"
   remote_initrd = [
-    "--name main https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-initramfs.x86_64.img",
+    "--name initramfs.xz https://github.com/siderolabs/talos/releases/download/${var.talos_version}/initramfs-amd64.xz"
   ]
+
   remote_args = [
-    "initrd=main",
-    "coreos.live.rootfs_url=https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-rootfs.x86_64.img",
-    "coreos.inst.ignition_url=${var.matchbox_http_endpoint}/ignition?uuid=$${uuid}&mac=$${mac:hexhyp}",
+    "initrd=initramfs.xz",
+    "init_on_alloc=1",
+    "slab_nomerge",
+    "pti=on",
+    "console=tty0",
+    "console=ttyS0",
+    "printk.devkmsg=on",
+    "talos.platform=metal",
+    "talos.config=${var.matchbox_http_endpoint}/generic?uuid=$${uuid}&mac=$${mac:hexhyp}",
+    "talos.experimental.wipe=system"
   ]
 }
 
@@ -31,20 +27,9 @@ resource "matchbox_profile" "nodes" {
 
   kernel = local.remote_kernel
   initrd = local.remote_initrd
+  args   = local.remote_args
 
   # tflint-ignore: terraform_deprecated_index
-  args = concat(local.remote_args, ["coreos.inst.install_dev=${var.nodes.*.install_dev[count.index]}"])
+  generic_config = file(var.nodes.*.talos_config[count.index])
 
-  # tflint-ignore: terraform_deprecated_index
-  raw_ignition = data.ct_config.nodes.*.rendered[count.index]
-}
-
-data "ct_config" "nodes" {
-  count = length(var.nodes)
-  content = templatefile("fcos/node.yaml", {
-    ssh_authorized_key = var.ssh_authorized_key
-  })
-  strict = true
-  # tflint-ignore: terraform_deprecated_index
-  snippets = [for f in lookup(var.snippets, var.nodes.*.name[count.index], []) : file(f)]
 }
