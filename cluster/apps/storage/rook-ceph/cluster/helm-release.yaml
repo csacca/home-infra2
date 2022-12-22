@@ -91,7 +91,7 @@ spec:
 
       annotations:
         osd:
-          - k8s.v1.cni.cncf.io/networks: network/multus-vlan20
+          k8s.v1.cni.cncf.io/networks: network/multus-vlan20
 
       resources:
         mgr:
