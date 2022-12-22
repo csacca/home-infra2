@@ -162,12 +162,12 @@ spec:
             failureDomain: osd
 
           dataPools:
-            - name: ceph-fs-default
+            - name: default
               replicated:
               size: 3
               failureDomain: osd
 
-            - name: ceph-fs-ec
+            - name: ec
               erasureCoded:
                 dataChunks: 3
                 codingChunks: 2
