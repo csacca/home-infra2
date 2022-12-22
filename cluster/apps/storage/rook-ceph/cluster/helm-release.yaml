@@ -51,11 +51,13 @@ spec:
       bdev_enable_discard = true
       bdev_async_discard = true
       bluefs_buffered_io = false
+      cluster_network = 10.0.20.0/24
     cephClusterSpec:
       network:
-        provider: multus
-        selectors:
-          cluster: network/multus-vlan20
+        provider: host
+        # provider: multus
+        # selectors:
+        #   cluster: network/multus-vlan20
       crashCollector:
         disable: false
       dashboard:
@@ -86,6 +88,11 @@ spec:
             devices:
               - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCJ6J386"
               - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCK93HWK"
+
+      annotations:
+        osd:
+          - k8s.v1.cni.cncf.io/networks: network/multus-vlan20
+
       resources:
         mgr:
           requests:
