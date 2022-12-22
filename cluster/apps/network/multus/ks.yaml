@@ -14,3 +14,22 @@ spec:
     kind: GitRepository
     name: flux-cluster
   wait: true
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-multus-config
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  interval: 10m
+  path: "./cluster/apps/network/multus/config"
+  prune: true
+  dependsOn:
+    - name: cluster-apps-multus
+  sourceRef:
+    kind: GitRepository
+    name: flux-cluster
+  wait: true
