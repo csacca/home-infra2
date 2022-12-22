@@ -68,26 +68,6 @@ nodes:
               [plugins."io.containerd.grpc.v1.cri"]
                 enable_unprivileged_ports = true
                 enable_unprivileged_icmp = true
-          - path: /etc/cni/net.d/multus-vlan20.conf
-            op: create
-            content: |
-              {
-                "cniVersion": "0.3.1",
-                "name": "multus-vlan20",
-                "type": "macvlan",
-                "mode": "bridge",
-                "master": "eth2.20",
-                "mtu": 9000,
-                "ipam": {
-                    "type": "whereabouts",
-                    "range": "10.0.20.0/24",
-                    "exclude": [
-                      "10.0.20.0/28",
-                      "10.0.20.100/28",
-                      "10.0.20.254/32"
-                    ]
-                }
-              }
 
   - hostname: vega.${mgmtDomainName}
     ipAddress: 10.99.1.101
@@ -129,26 +109,6 @@ nodes:
               [plugins."io.containerd.grpc.v1.cri"]
                 enable_unprivileged_ports = true
                 enable_unprivileged_icmp = true
-          - path: /etc/cni/net.d/multus-vlan20.conf
-            op: create
-            content: |
-              {
-                "cniVersion": "0.3.1",
-                "name": "multus-vlan20",
-                "type": "macvlan",
-                "mode": "bridge",
-                "master": "eth1.20",
-                "mtu": 9000,
-                "ipam": {
-                    "type": "whereabouts",
-                    "range": "10.0.20.0/24",
-                    "exclude": [
-                      "10.0.20.0/28",
-                      "10.0.20.100/28",
-                      "10.0.20.254/32"
-                    ]
-                }
-              }
 
   - hostname: capella.${mgmtDomainName}
     ipAddress: 10.99.1.102
@@ -190,26 +150,6 @@ nodes:
               [plugins."io.containerd.grpc.v1.cri"]
                 enable_unprivileged_ports = true
                 enable_unprivileged_icmp = true
-          - path: /etc/cni/net.d/multus-vlan20.conf
-            op: create
-            content: |
-              {
-                "cniVersion": "0.3.1",
-                "name": "multus-vlan20",
-                "type": "macvlan",
-                "mode": "bridge",
-                "master": "eth1.20",
-                "mtu": 9000,
-                "ipam": {
-                    "type": "whereabouts",
-                    "range": "10.0.20.0/24",
-                    "exclude": [
-                      "10.0.20.0/28",
-                      "10.0.20.100/28",
-                      "10.0.20.254/32"
-                    ]
-                }
-              }
 
 controlPlane:
   inlinePatch:
