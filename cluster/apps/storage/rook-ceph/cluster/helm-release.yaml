@@ -79,15 +79,15 @@ spec:
         nodes:
           - name: polaris
             devices:
-              - name: "/dev/disk/by-id/scsi-SATA_HGST_HDN726040AL_K7J8YWUL"
-              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD4003FFBX-6_VBG8RTPR"
-              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD40EFRX-68N_WD-WCC7K4PCKY5A"
-              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD40EFRX-68W_WD-WCC4E0CPLY9Y"
-              - name: "/dev/disk/by-id/scsi-SATA_WDC_WD40EFRX-68W_WD-WCC4E6TZH5LD"
+              - name: "/dev/disk/by-id/ata-HGST_HDN726040ALE614_K7J8YWUL"
+              - name: "/dev/disk/by-id/ata-WDC_WD4003FFBX-68MU3N0_VBG8RTPR"
+              - name: "/dev/disk/by-id/ata-WDC_WD40EFRX-68N32N0_WD-WCC7K4PCKY5A"
+              - name: "/dev/disk/by-id/ata-WDC_WD40EFRX-68WT0N0_WD-WCC4E0CPLY9Y"
+              - name: "/dev/disk/by-id/ata-WDC_WD40EFRX-68WT0N0_WD-WCC4E6TZH5LD"
           - name: capella
             devices:
-              - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCJ6J386"
-              - name: "/dev/disk/by-id/scsi-SATA_ST4000LM024-2AN1_WCK93HWK"
+              - name: "/dev/disk/by-id/ata-ST4000LM024-2AN17V_WCJ6J386"
+              - name: "/dev/disk/by-id/ata-ST4000LM024-2AN17V_WCK93HWK"
 
       annotations:
         osd:
