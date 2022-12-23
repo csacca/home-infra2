@@ -24,7 +24,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  interval: 10m
+  interval: 60m
   path: "./cluster/apps/network/multus/config"
   prune: true
   dependsOn:
