@@ -69,6 +69,8 @@ spec:
             enabled: true
           - name: pg_autoscaler
             enable: true
+          - name: diskprediction_local
+            enable: true
 
       storage:
         useAllNodes: false
