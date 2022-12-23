@@ -209,8 +209,8 @@ spec:
           dataPool:
             failureDomain: osd
             erasureCoded:
-              dataChunks: 5
-              codingChunks: 3
+              dataChunks: 3
+              codingChunks: 2
           preservePoolsOnDelete: true
           gateway:
             port: 80
