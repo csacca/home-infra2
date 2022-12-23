@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: ./cluster/apps/default/smtp-relay/app
+  path: ./cluster/apps/network/smtp-relay/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -17,5 +17,5 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: smtp-relay
-      namespace: default
+      namespace: network
   timeout: 2m
