@@ -54,7 +54,7 @@ spec:
       cluster_network = 10.0.20.0/24
     cephClusterSpec:
       network:
-        provider: host
+        provider: multus
         # provider: multus
         # selectors:
         #   cluster: network/multus-vlan20
