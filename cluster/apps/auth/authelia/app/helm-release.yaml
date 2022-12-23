@@ -29,7 +29,7 @@ spec:
     - name: redis
       namespace: databases
     - name: smtp-relay
-      namespace: default
+      namespace: network
   values:
     controller:
       replicas: 3
