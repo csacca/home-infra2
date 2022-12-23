@@ -58,7 +58,13 @@ task talos:get-kubeconfig
 task talos:preflux
 ```
 
-7. Install flux + reconcile cluster:
+7. Wipe Ceph OSD drives if needed:
+
+```bash
+task talos:wipe-rook
+```
+
+8. Install flux + reconcile cluster:
 
 ```bash
 task cluster:install
