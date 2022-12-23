@@ -163,7 +163,7 @@ spec:
           dataPools:
             - name: default
               replicated:
-              size: 3
+                size: 3
               failureDomain: osd
 
             - name: ec
