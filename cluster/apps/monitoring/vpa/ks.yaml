@@ -15,4 +15,4 @@ spec:
     name: flux-cluster
   wait: true
   dependsOn:
-    - name: cluster-apps-thanos
+    - name: cluster-apps-thanos-app
