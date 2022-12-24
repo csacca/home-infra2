@@ -189,7 +189,7 @@ spec:
           enabled: true
           isDefault: false
           name: ceph-fs
-          pool: ceph-fs-ec
+          pool: ec
           reclaimPolicy: Delete
           allowVolumeExpansion: true
           parameters:
