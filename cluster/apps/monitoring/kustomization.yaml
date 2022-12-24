@@ -4,9 +4,9 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
 
-  # - ./goldilocks
+  - ./goldilocks/ks.yaml
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   # - ./scrutiny
   - ./thanos/ks.yaml
-  # - ./vpa
+  - ./vpa/ks.yaml
