@@ -77,6 +77,9 @@ spec:
             - receiver: "null"
               matchers:
                 - alertname =~ "InfoInhibitor|Watchdog"
+            - receiver: "null"
+              matchers:
+                - alertname = "CephNodeInconsistentMTU"
             - receiver: "pushover"
               matchers:
                 - severity = "critical"
