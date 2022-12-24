@@ -80,6 +80,10 @@ spec:
             - receiver: "null"
               matchers:
                 - alertname = "CephNodeInconsistentMTU"
+            - receiver: "null"
+              matchers:
+                - alertname = "CephNodeNetworkPacketDrops"
+                - device = "eth0.50"
             - receiver: "pushover"
               matchers:
                 - severity = "critical"
