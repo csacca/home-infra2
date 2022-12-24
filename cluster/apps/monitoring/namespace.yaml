@@ -7,3 +7,4 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: enable
     goldilocks.fairwinds.com/enabled: "true"
     secret.home.arpa/postgres-superuser: "true"
+    pod-security.kubernetes.io/enforce: privileged
