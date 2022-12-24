@@ -84,10 +84,10 @@ spec:
 
     persistence:
       config:
-        enabled: false
-        # existingClaim: scrutiny-data
-        # mountPath: /opt/scrutiny/config
-        # subPath: scrutiny
+        enabled: true
+        existingClaim: scrutiny-data
+        mountPath: /opt/scrutiny/config
+        subPath: scrutiny
 
     resources:
       requests:
