@@ -129,7 +129,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_up{instance=\"$instance\", job=\"$job\"}",
@@ -187,7 +187,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_server_id{instance=\"$instance\", job=\"$job\"}",
@@ -258,7 +258,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_download_bits_per_second{instance=\"$instance\", job=\"$job\"}*10^-6",
@@ -315,7 +315,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_upload_bits_per_second{instance=\"$instance\", job=\"$job\"}*10^-6",
@@ -372,7 +372,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_ping_latency_milliseconds{instance=\"$instance\", job=\"$job\"}",
@@ -429,7 +429,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_jitter_latency_milliseconds{instance=\"$instance\", job=\"$job\"}",
@@ -534,7 +534,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_download_bits_per_second{instance=\"$instance\", job=\"$job\"}*10^-6",
@@ -625,7 +625,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_upload_bits_per_second{instance=\"$instance\", job=\"$job\"}*10^-6",
@@ -716,7 +716,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_ping_latency_milliseconds{instance=\"$instance\", job=\"$job\"}",
@@ -727,7 +727,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "PBFA97CFB590B2093"
+                        "uid": "prometheus"
                     },
                     "exemplar": true,
                     "expr": "speedtest_jitter_latency_milliseconds{instance=\"$instance\", job=\"$job\"}",
@@ -765,7 +765,7 @@
                 "skipUrlSync": false,
                 "sort": 0,
                 "type": "query",
-                "datasource": "PBFA97CFB590B2093"
+                "datasource": "prometheus"
             },
             {
                 "current": {},
@@ -785,7 +785,7 @@
                 "skipUrlSync": false,
                 "sort": 0,
                 "type": "query",
-                "datasource": "PBFA97CFB590B2093"
+                "datasource": "prometheus"
             }
         ]
     },
