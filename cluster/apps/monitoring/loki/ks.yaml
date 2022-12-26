@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-rook-ceph-cluster
-    - name: cluster-apps-kube-prometheus-stack
+    - name: cluster-apps-kube-prometheus-stack-app
   path: ./cluster/apps/monitoring/loki/app
   prune: true
   sourceRef:
