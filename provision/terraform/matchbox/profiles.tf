@@ -15,7 +15,7 @@ locals {
     "printk.devkmsg=on",
     "talos.platform=metal",
     "talos.config=${var.matchbox_http_endpoint}/generic?uuid=$${uuid}&mac=$${mac:hexhyp}",
-    "talos.experimental.wipe=system"
+    # "talos.experimental.wipe=system"
   ]
 }
 
