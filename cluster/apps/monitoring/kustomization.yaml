@@ -7,6 +7,7 @@ resources:
   - ./goldilocks/ks.yaml
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
+  - ./loki/ks.yaml
   - ./scrutiny/ks.yaml
   - ./smartctl-exporter/ks.yaml
   - ./speedtest-exporter/ks.yaml
