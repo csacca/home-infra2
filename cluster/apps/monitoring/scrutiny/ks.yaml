@@ -11,7 +11,7 @@ spec:
   path: "./cluster/apps/monitoring/scrutiny/app"
   prune: true
   dependsOn:
-    - name: cluster-apps-storage-rook-ceph-cluster
+    - name: cluster-apps-rook-ceph-cluster
   sourceRef:
     kind: GitRepository
     name: flux-cluster

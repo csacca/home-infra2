@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-rook-ceph-operator
+  name: cluster-apps-rook-ceph-operator
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -18,13 +18,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-rook-ceph-cluster
+  name: cluster-apps-rook-ceph-cluster
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-storage-rook-ceph-operator
+    - name: cluster-apps-rook-ceph-operator
     - name: cluster-apps-multus-config
   interval: 10m
   path: ./cluster/apps/storage/rook-ceph/cluster
@@ -37,13 +37,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-rook-ceph-config
+  name: cluster-apps-rook-ceph-config
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-storage-rook-ceph-cluster
+    - name: cluster-apps-rook-ceph-cluster
   interval: 10m
   path: ./cluster/apps/storage/rook-ceph/config
   prune: true
@@ -55,13 +55,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-rook-ceph-toolbox
+  name: cluster-apps-rook-ceph-toolbox
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-storage-rook-ceph-cluster
+    - name: cluster-apps-rook-ceph-cluster
   interval: 10m
   path: ./cluster/apps/storage/rook-ceph/rook-direct-mount
   prune: true
@@ -73,13 +73,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-storage-rook-ceph-grafana-dashboard
+  name: cluster-apps-rook-ceph-grafana-dashboard
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-storage-rook-ceph-cluster
+    - name: cluster-apps-rook-ceph-cluster
   interval: 10m
   path: ./cluster/apps/storage/rook-ceph/dashboard
   prune: true

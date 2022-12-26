@@ -11,7 +11,7 @@ spec:
   path: ./cluster/apps/databases/redis/app
   prune: true
   dependsOn:
-    - name: cluster-apps-storage-rook-ceph-config
+    - name: cluster-apps-rook-ceph-config
   sourceRef:
     kind: GitRepository
     name: flux-cluster
