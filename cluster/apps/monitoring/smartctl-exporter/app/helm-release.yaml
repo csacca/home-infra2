@@ -22,6 +22,10 @@ spec:
       retries: 3
   values:
     fullnameOverride: *app
+    image:
+      repository: quay.io/prometheuscommunity/smartctl-exporter
+      pullPolicy: IfNotPresent
+      tag: "v0.9.1"
     config:
       devices:
     serviceMonitor:
