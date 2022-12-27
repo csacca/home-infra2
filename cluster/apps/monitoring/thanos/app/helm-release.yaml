@@ -27,13 +27,15 @@ spec:
   values:
     query:
       enabled: true
+
       replicaCount: 3
-      podAntiAffinityPreset: hard
       replicaLabel:
         - __replica__
+
       dnsDiscovery:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
+
       ingress:
         enabled: true
         ingressClassName: "nginx"
@@ -44,8 +46,17 @@ spec:
         extraTls:
           - hosts:
               - *host
+
+      resources:
+        requests:
+          cpu: 15m
+          memory: 64M
+        limits:
+          memory: 99M
+
     queryFrontend:
       enabled: false
+
     bucketweb:
       enabled: false
     compactor:
