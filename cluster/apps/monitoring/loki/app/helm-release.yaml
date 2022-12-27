@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: loki
+  name: &app loki
   namespace: monitoring
 spec:
   interval: 15m
@@ -14,6 +14,7 @@ spec:
         kind: HelmRepository
         name: grafana-charts
         namespace: flux-system
+
   install:
     createNamespace: true
     remediation:
@@ -24,6 +25,7 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
+
   values:
     loki:
       structuredConfig:
@@ -110,10 +112,6 @@ spec:
     gateway:
       enabled: true
       replicas: 3
-      image:
-        registry: ghcr.io
-        repository: nginxinc/nginx-unprivileged
-        tag: 1.23-alpine
 
       ingress:
         enabled: true
