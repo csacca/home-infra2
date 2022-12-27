@@ -91,6 +91,10 @@ spec:
             url: http://thanos-query.monitoring.svc.cluster.local:9090
             isDefault:
             uid: prometheus
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://loki-gateway.monitoring.svc.cluster.local:80
 
     dashboards:
       default:
