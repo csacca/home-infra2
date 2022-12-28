@@ -189,17 +189,19 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
+      loadBalancerIP: ${SVC_VECTOR_AGGREGATOR_ADDRESS}
+      externalTrafficPolicy: Local
 
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              kind: Service
-              name: vector-aggregator
-            patch:
-              - op: add
-                path: /spec/loadBalancerIP
-                value: ${SVC_VECTOR_AGGREGATOR}
-              - op: replace
-                path: /spec/externalTrafficPolicy
-                value: Local
+  # postRenderers:
+  #   - kustomize:
+  #       patchesJson6902:
+  #         - target:
+  #             kind: Service
+  #             name: vector-aggregator
+  #           patch:
+  #             - op: add
+  #               path: /spec/loadBalancerIP
+  #               value: ${SVC_VECTOR_AGGREGATOR_ADDRESS}
+  #             - op: replace
+  #               path: /spec/externalTrafficPolicy
+  #               value: Local
