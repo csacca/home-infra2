@@ -10,4 +10,3 @@ resources:
   - ./monitoring
   - ./network
   - ./storage
-  # - ./system-upgrade
