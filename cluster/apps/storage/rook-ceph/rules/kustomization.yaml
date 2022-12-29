@@ -4,7 +4,31 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 patches:
-  - path: patch-rook-ceph-rules.yaml
+  - patch: |-
+      ### https://raw.githubusercontent.com/rook/rook/v1.10.8/deploy/examples/monitoring/localrules.yaml
+      # ref: https://rook.github.io/docs/rook/v1.9/ceph-monitoring.html#customize-alerts
+      # CephNodeNetworkPacketDrops
+      - op: replace
+        path: /spec/groups/6/rules/1/expr
+        value: |
+          (
+            increase(node_network_receive_drop_total{device!="lo"}[1m]) +
+            increase(node_network_transmit_drop_total{device!="lo"}[1m])
+          ) / (
+            increase(node_network_receive_packets_total{device!="lo"}[1m]) +
+            increase(node_network_transmit_packets_total{device!="lo"}[1m])
+          ) >= 0.005 or (
+            increase(node_network_receive_drop_total{device!="lo"}[1m]) +
+            increase(node_network_transmit_drop_total{device!="lo"}[1m])
+          ) >= 75
+      - op: add
+        path: /spec/groups/6/rules/1/for
+        value: 1m
+
+      # CephNodeInconsistentMTU
+      - op: remove
+        path: /spec/groups/6/rules/4
+
     target:
       group: monitoring.coreos.com
       version: v1
