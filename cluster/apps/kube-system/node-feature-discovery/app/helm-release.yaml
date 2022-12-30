@@ -84,6 +84,13 @@ spec:
                 - usbId:
                     vendor: ["1a6e", "18d1"]
 
+            - name: "wd-elements"
+              matchOn:
+                - usbId:
+                    class: ["08"]
+                    vendor: ["1058"]
+                    device: ["25a3"]
+
       resources:
         requests:
           cpu: 15m
