@@ -13,9 +13,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-cluster
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: kubevirt
-      namespace: kubevirt
   timeout: 2m
