@@ -13,7 +13,7 @@ spec:
         - CPUManager
         - GPU
         - HostDevices
-      memoryOvercommit: "150"
+      memoryOvercommit: 150
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
   workloadUpdateStrategy: {}
