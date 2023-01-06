@@ -9,8 +9,11 @@ resources:
   - kubevirt-cr.yaml
   - cdi-cr.yaml
 
-patches:
-  - path: ./patches/storageprofile-ceph-block.yaml
-    target:
-      kind: StorageProfile
-      name: ceph-block
+# patches:
+#   - path: ./patches/storageprofile-ceph-block.yaml
+#     target:
+#       kind: StorageProfile
+#       name: ceph-block
+
+patchesStrategicMerge:
+  - ./patches/storageprofile-ceph-block.yaml
