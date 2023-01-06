@@ -1,0 +1,94 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "Group Cert-Manager image (for CRDs) and chart",
+      "groupName": "Cert-Manager",
+      "matchPackagePatterns": [
+        "cert-manager"
+      ],
+      "matchDatasources": [
+        "docker",
+        "helm"
+      ],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Rook-Ceph image and chart",
+      "groupName": "Rook Ceph",
+      "matchPackagePatterns": [
+        "rook.ceph"
+      ],
+      "matchDatasources": [
+        "docker",
+        "helm"
+      ],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Cilium image and chart",
+      "groupName": "cilium",
+      "matchDatasources": [
+        "helm",
+        "docker"
+      ],
+      "matchPackageNames": [
+        "quay.io/cilium/cilium",
+        "quay.io/cilium/operator-generic",
+        "cilium"
+      ],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Thanos image and chart - versions do not match",
+      "groupName": "Thanos",
+      "matchDatasources": [
+        "docker",
+        "github-releases",
+        "helm"
+      ],
+      "matchPackagePatterns": [
+        "quay.io/thanos/thanos",
+        "thanos"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "Vector image and chart - versions do not match",
+      "groupName": "Vector",
+      "matchDatasources": [
+        "docker",
+        "github-releases",
+        "helm"
+      ],
+      "matchPackagePatterns": [
+        "vector"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      },
+      "separateMinorPatch": false
+    }
+  ]
+}
