@@ -11,7 +11,8 @@
     "prettier.configPath": ".github/linters/.prettierrc.yaml",
     "prettier.ignorePath": ".github/linters/.prettierignore",
     "yaml.schemas": {
-        },
+        "https://raw.githubusercontent.com/CCI-MOC/openshift-schemas/1e4c3258435679424e64b9182cca62baecbe70e7/schemas/master-standalone/storageprofile-cdi-v1beta1.json": "file:///mnt/c/Users/Chris/dev/home-infra2/cluster/apps/kubevirt/kubevirt/app/patches/storageprofile.yaml"
+    },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs":"active",
     "editor.hover.delay": 1500
