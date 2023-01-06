@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/CCI-MOC/openshift-schemas/1e4c3258435679424e64b9182cca62baecbe70e7/schemas/master-standalone/storageprofile-cdi-v1beta1.json
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: StorageProfile
+metadata:
+  name: ceph-fs
+  namespace: default
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+    kustomize.toolkit.fluxcd.io/ssa: merge
+spec:
+  claimPropertySets:
+    - accessModes:
+        - "ReadWriteMany"
+      volumeMode: "Filesystem"

@@ -8,4 +8,6 @@ resources:
   - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.55.2/cdi-operator.yaml
   - ./kubevirt-cr.yaml
   - ./cdi-cr.yaml
-  - ./patches/sc-ceph-block.yaml
+  - ./patches/sp-ceph-block.yaml
+  - ./patches/sp-ceph-bucket.yaml
+  - ./patches/sp-ceph-fs.yaml
