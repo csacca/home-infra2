@@ -1,0 +1,15 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus-kubevirt-rules
+  namespace: kubevirt
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+    kustomize.toolkit.fluxcd.io/ssa: merge
+spec:
+  groups:
+    - name: kubevirt.rules
+      rules:
+        - alert: KubeVirtComponentExceedsRequestedMemory
+          $patch: delete
