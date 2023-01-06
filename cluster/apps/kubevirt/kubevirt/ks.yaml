@@ -14,3 +14,16 @@ spec:
     kind: GitRepository
     name: flux-cluster
   timeout: 2m
+
+  patches:
+    - target:
+        kind: StorageProfile
+        name: ceph-block
+      patch: |
+        - op: add
+          path: /spec
+          value:
+            claimPropertySets:
+              - accessModes:
+                  - "ReadWriteOnce"
+                volumeMode: "Block"
