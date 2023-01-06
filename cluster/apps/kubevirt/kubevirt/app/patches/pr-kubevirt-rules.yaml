@@ -8,8 +8,18 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: disabled
     kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
-  groups:
-    - name: kubevirt.rules
-      rules:
-        - alert: KubeVirtComponentExceedsRequestedMemory
-          $patch: delete
+  groups: []
+
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+patches:
+  - patch: |-
+      # KubeVirtComponentExceedsRequestedMemory
+      - op: remove
+        path: /spec/groups[0].rules[36]
+    target:
+      kind: PrometheusRule
+      name: prometheus-kubevirt-rules
+      namespace: kubevirt
