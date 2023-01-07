@@ -11,4 +11,3 @@ resources:
   - ./patches/sp-ceph-block.yaml
   - ./patches/sp-ceph-bucket.yaml
   - ./patches/sp-ceph-fs.yaml
-  - ./patches/pr-kubevirt-rules.yaml
