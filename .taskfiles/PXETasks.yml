@@ -66,9 +66,31 @@ tasks:
         --password {{.PASSWORD}} \
         --bootdevice pxe
 
+  rigel:
+    desc: Reboot rigel to pxe via intel amt
+    silent: true
+    vars:
+      HOST:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.rigel.hostname' -
+      USERNAME:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.rigel.username' -
+      PASSWORD:
+        sh: sops -d "provision/pxe.sops.yaml" | yq -e eval '.hosts.rigel.password' -
+    cmds:
+      - |
+        docker run -it --rm \
+        docker.io/polymathrobotics/meshcmd \
+        amtpower \
+        --reset \
+        --host {{.HOST}} \
+        --user {{.USERNAME}} \
+        --password {{.PASSWORD}} \
+        --bootdevice pxe
+
   all:
     desc: pxe boot all nodes
     cmds:
       - task: polaris
       - task: vega
       - task: capella
+      - task: rigel

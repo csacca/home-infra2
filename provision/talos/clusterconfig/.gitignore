@@ -2,3 +2,4 @@ home-ops-polaris.mgmt.local.yaml
 talosconfig
 home-ops-vega.mgmt.local.yaml
 home-ops-capella.mgmt.local.yaml
+home-ops-rigel.mgmt.local.yaml

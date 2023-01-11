@@ -16,8 +16,6 @@ tasks:
       - sops --decrypt {{.CLUSTER_DIR}}/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
       - kubectl apply -f {{.CLUSTER_DIR}}/flux/vars/cluster-settings.yaml
       - kubectl apply --kustomize {{.CLUSTER_DIR}}/flux/config
-      - sleep 30
-      - task: reconcile
     preconditions:
       - sh: test -f {{.SOPS_AGE_KEY_FILE}}
         msg: |

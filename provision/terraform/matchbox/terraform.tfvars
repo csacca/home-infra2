@@ -1,6 +1,6 @@
 matchbox_http_endpoint = "http://matchbox.example.com:8080"
 matchbox_rpc_endpoint  = "matchbox.example.com:8081"
-talos_version          = "v1.3.0"
+talos_version          = "v1.3.1"
 
 cluster_name = "home-ops"
 
@@ -22,5 +22,11 @@ nodes = [
     mac          = "6c:2b:59:d9:7f:22",
     domain       = "capella.mgmt.local",
     talos_config = "../../talos/clusterconfig/home-ops-capella.mgmt.local.yaml"
+  },
+  {
+    name         = "rigel",
+    mac          = "14:b3:1f:24:9c:0f",
+    domain       = "rigel.mgmt.local",
+    talos_config = "../../talos/clusterconfig/home-ops-rigel.mgmt.local.yaml"
   }
 ]
