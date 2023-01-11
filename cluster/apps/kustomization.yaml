@@ -5,6 +5,7 @@ resources:
   - ./auth
   - ./databases
   # - ./default
+  - ./flux-system
   - ./kube-system
   - ./kubevirt
   - ./kyverno
