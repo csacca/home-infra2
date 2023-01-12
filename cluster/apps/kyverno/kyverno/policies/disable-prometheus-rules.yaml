@@ -1,0 +1,31 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disable-prometheus-rules
+  annotations:
+    policies.kyverno.io/title: Disable Prometheus Rules
+    policies.kyverno.io/subject: PrometheusRules
+    policies.kyverno.io/description: >-
+      This policy applies a disabled label to select prometheus rules
+spec:
+  mutateExistingOnPolicyUpdate: true
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - name: prometheus-kubevirt-rules
+      match:
+        any:
+          - resources:
+              kinds:
+                - PrometheusRule
+              names:
+                - prometheus-kubevirt-rules
+      mutate:
+        patchStrategicMerge:
+          spec:
+            groups:
+              - (name): kubevirt.rules
+                rules:
+                  - (alert): KubeVirtComponentExceedsRequestedMemory
+                    labels:
+                      +(prometheus_rule_disabled): true

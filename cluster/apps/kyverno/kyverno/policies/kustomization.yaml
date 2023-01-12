@@ -5,6 +5,7 @@ resources:
   - apply-ingress-auth-annotations.yaml
   - apply-ingress-external-dns-annotations.yaml
   - apply-ingress-whitelist-annotations.yaml
+  - disable-prometheus-rules.yaml
   - exclude-cephfs-from-alerts.yaml
   - inject-timezone.yaml
   - remove-cpu-limit.yaml
