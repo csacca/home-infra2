@@ -20,12 +20,16 @@ spec:
                 - PrometheusRule
               names:
                 - prometheus-kubevirt-rules
+      preconditions:
+        all:
+          - key: "{{ request.object.spec.groups[0].name || '' }}"
+            operator: Equals
+            value: "kubevirt.rules"
+          - key: "{{ request.object.spec.groups[0].rules[36].alert || ''}}"
+            operator: Equals
+            value: "KubeVirtComponentExceedsRequestedMemory"
       mutate:
-        patchStrategicMerge:
-          spec:
-            groups:
-              - (name): kubevirt.rules
-                rules:
-                  - (alert): KubeVirtComponentExceedsRequestedMemory
-                    labels:
-                      +(prometheus_rule_disabled): true
+        patchesJson6902: |-
+          - path: /spec/groups/0/rules/36/labels/prometheus_rule_disabled
+            op: add
+            value: true
