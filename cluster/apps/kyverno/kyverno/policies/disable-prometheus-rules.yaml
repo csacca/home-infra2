@@ -14,7 +14,7 @@ spec:
   rules:
     - name: prometheus-kubevirt-rules
       match:
-        any:
+        all:
           - resources:
               kinds:
                 - PrometheusRule
