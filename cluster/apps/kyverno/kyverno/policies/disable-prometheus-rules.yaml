@@ -10,26 +10,36 @@ metadata:
       This policy applies a disabled label to select prometheus rules
 spec:
   mutateExistingOnPolicyUpdate: true
-  generateExistingOnPolicyUpdate: true
   rules:
-    - name: prometheus-kubevirt-rules
+    - name: prometheus-add-labels
       match:
-        any:
-          - resources:
-              kinds:
-                - monitoring.coreos.com/v1/PrometheusRule
-              names:
-                - "prometheus-kubevirt-rules"
-      preconditions:
-        all:
-          - key: "{{ request.object.spec.groups[0].name || '' }}"
-            operator: Equals
-            value: "kubevirt.rules"
-          - key: "{{ request.object.spec.groups[0].rules[36].alert || ''}}"
-            operator: Equals
-            value: "KubeVirtComponentExceedsRequestedMemory"
+        resources:
+          kinds:
+            - PrometheusRule
       mutate:
-        patchesJson6902: |-
-          - path: /spec/groups/0/rules/36/labels/prometheus_rule_disabled
-            op: add
-            value: true
+        patchStrategicMerge:
+          metadata:
+            labels:
+              kyverno-test-label: test
+
+    # - name: prometheus-kubevirt-rules
+    #   match:
+    #     any:
+    #       - resources:
+    #           kinds:
+    #             - monitoring.coreos.com/v1/PrometheusRule
+    #           names:
+    #             - "prometheus-kubevirt-rules"
+    #   preconditions:
+    #     all:
+    #       - key: "{{ request.object.spec.groups[0].name || '' }}"
+    #         operator: Equals
+    #         value: "kubevirt.rules"
+    #       - key: "{{ request.object.spec.groups[0].rules[36].alert || ''}}"
+    #         operator: Equals
+    #         value: "KubeVirtComponentExceedsRequestedMemory"
+    #   mutate:
+    #     patchesJson6902: |-
+    #       - path: /spec/groups/0/rules/36/labels/prometheus_rule_disabled
+    #         op: add
+    #         value: true
