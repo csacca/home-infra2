@@ -13,9 +13,10 @@ spec:
   rules:
     - name: prometheus-add-labels
       match:
-        resources:
-          kinds:
-            - PrometheusRule
+        any:
+          resources:
+            kinds:
+              - PrometheusRule
       mutate:
         patchStrategicMerge:
           metadata:
