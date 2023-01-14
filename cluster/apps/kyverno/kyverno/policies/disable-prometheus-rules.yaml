@@ -14,12 +14,12 @@ spec:
   rules:
     - name: prometheus-kubevirt-rules
       match:
-        all:
+        any:
           - resources:
               kinds:
-                - PrometheusRule
+                - monitoring.coreos.com/v1/PrometheusRule
               names:
-                - prometheus-kubevirt-rules
+                - "prometheus-kubevirt-rules"
       preconditions:
         all:
           - key: "{{ request.object.spec.groups[0].name || '' }}"
