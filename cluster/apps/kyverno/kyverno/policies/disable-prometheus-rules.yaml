@@ -9,19 +9,20 @@ metadata:
     policies.kyverno.io/description: >-
       This policy applies a disabled label to select prometheus rules
 spec:
+  background: true
   mutateExistingOnPolicyUpdate: true
   rules:
-    - name: prometheus-add-labels
+    - name: disable-prometheus-rules
       match:
         any:
           - resources:
               kinds:
-                - PrometheusRule
+                - "monitoring.coreos.com/*/PrometheusRule"
       mutate:
-        patchStrategicMerge:
-          metadata:
-            labels:
-              kyverno-test-label: test
+        patchesJson6902: |-
+          - path: /metadata/labels/kyverno-test-label
+            op: add
+            value: test
 
     # - name: prometheus-kubevirt-rules
     #   match:
