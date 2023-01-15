@@ -18,6 +18,12 @@ spec:
           - resources:
               kinds:
                 - "monitoring.coreos.com/*/PrometheusRule"
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - "cdi"
+
       mutate:
         patchesJson6902: |-
           - path: /metadata/labels/kyverno-test-label
