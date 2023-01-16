@@ -25,6 +25,10 @@ spec:
                 - "cdi"
 
       mutate:
+        targets:
+          - kind: PrometheusRule
+            name: "{{ request.object.metadata.name }}"
+            namespace: "{{ request.object.metadata.namespace }}"
         patchesJson6902: |-
           - path: /metadata/labels/kyverno-test-label
             op: add
