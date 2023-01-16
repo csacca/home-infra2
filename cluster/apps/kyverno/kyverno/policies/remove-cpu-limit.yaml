@@ -25,10 +25,10 @@ spec:
               - (name): "*"
                 resources:
                   limits:
-                    cpu: null
+                    cpu: ''
 
             containers:
               - (name): "*"
                 resources:
                   limits:
-                    cpu: null
+                    cpu: ''
