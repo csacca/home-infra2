@@ -10,7 +10,7 @@ rules:
   - apiGroups:
       - monitoring.coreos.com
     resources:
-      - prometheusrules
+      - prometheusrule
     verbs:
       - create
       - delete
