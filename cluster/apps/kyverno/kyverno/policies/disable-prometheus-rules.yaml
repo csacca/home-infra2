@@ -11,6 +11,7 @@ metadata:
 spec:
   background: true
   mutateExistingOnPolicyUpdate: true
+  schemaValidation: false
   rules:
     - name: prometheus-kubevirt-rules
       match:
