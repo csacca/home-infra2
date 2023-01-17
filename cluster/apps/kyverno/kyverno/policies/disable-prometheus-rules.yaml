@@ -12,46 +12,48 @@ spec:
   background: true
   mutateExistingOnPolicyUpdate: true
   rules:
-    - name: disable-prometheus-rules
+    - name: prometheus-kubevirt-rules
       match:
         any:
           - resources:
               kinds:
-                - "monitoring.coreos.com/*/PrometheusRule"
-      exclude:
-        any:
-          - resources:
-              namespaces:
-                - "cdi"
+                - monitoring.coreos.com/v1/PrometheusRule
+              names:
+                - "prometheus-kubevirt-rules"
+
+      preconditions:
+        all:
+          - key: "{{ request.object.spec.groups[0].name || '' }}"
+            operator: Equals
+            value: "kubevirt.rules"
+          - key: "{{ request.object.spec.groups[0].rules[36].alert || ''}}"
+            operator: Equals
+            value: "KubeVirtComponentExceedsRequestedMemory"
 
       mutate:
-        targets:
-          - kind: PrometheusRule
-            name: "{{ request.object.metadata.name }}"
-            namespace: "{{ request.object.metadata.namespace }}"
         patchesJson6902: |-
-          - path: /metadata/labels/kyverno-test-label
+          - path: /spec/groups/0/rules/36/labels/prometheus_rule_disabled
             op: add
-            value: test
+            value: true
 
-    # - name: prometheus-kubevirt-rules
+    # - name: disable-prometheus-rules
     #   match:
     #     any:
     #       - resources:
     #           kinds:
-    #             - monitoring.coreos.com/v1/PrometheusRule
-    #           names:
-    #             - "prometheus-kubevirt-rules"
-    #   preconditions:
-    #     all:
-    #       - key: "{{ request.object.spec.groups[0].name || '' }}"
-    #         operator: Equals
-    #         value: "kubevirt.rules"
-    #       - key: "{{ request.object.spec.groups[0].rules[36].alert || ''}}"
-    #         operator: Equals
-    #         value: "KubeVirtComponentExceedsRequestedMemory"
+    #             - "monitoring.coreos.com/*/PrometheusRule"
+    #   exclude:
+    #     any:
+    #       - resources:
+    #           namespaces:
+    #             - "cdi"
+
     #   mutate:
+    #     targets:
+    #       - kind: PrometheusRule
+    #         name: "{{ request.object.metadata.name }}"
+    #         namespace: "{{ request.object.metadata.namespace }}"
     #     patchesJson6902: |-
-    #       - path: /spec/groups/0/rules/36/labels/prometheus_rule_disabled
+    #       - path: /metadata/labels/kyverno-test-label
     #         op: add
-    #         value: true
+    #         value: test
