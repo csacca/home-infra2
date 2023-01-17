@@ -9,8 +9,8 @@ metadata:
     policies.kyverno.io/description: >-
       This policy removes CPU limits from all Pods.
 spec:
-  mutateExistingOnPolicyUpdate: true
-  generateExistingOnPolicyUpdate: true
+  #mutateExistingOnPolicyUpdate: true
+  schemaValidation: false
   rules:
     - name: remove-cpu-limit
       match:
@@ -25,10 +25,10 @@ spec:
               - (name): "*"
                 resources:
                   limits:
-                    cpu: ''
+                    cpu: null
 
             containers:
               - (name): "*"
                 resources:
                   limits:
-                    cpu: ''
+                    cpu: null
