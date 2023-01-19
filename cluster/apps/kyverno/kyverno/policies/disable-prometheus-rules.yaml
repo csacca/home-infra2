@@ -7,7 +7,7 @@ metadata:
     policies.kyverno.io/title: Disable Prometheus Rules
     policies.kyverno.io/subject: PrometheusRules
     policies.kyverno.io/description: >-
-      This policy applies a disabled label to select prometheus rules
+      This policy applies a disabled label to select prometheus rules.
 spec:
   background: true
   mutateExistingOnPolicyUpdate: true
