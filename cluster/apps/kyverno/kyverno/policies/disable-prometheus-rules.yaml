@@ -37,28 +37,5 @@ spec:
             name: "{{ request.object.metadata.name }}"
             namespace: "{{ request.object.metadata.namespace }}"
         patchesJson6902: |-
-          - path: /spec/groups/0/rules/36/labels/prometheus_rule_disabled
-            op: add
-            value: true
-
-    # - name: disable-prometheus-rules
-    #   match:
-    #     any:
-    #       - resources:
-    #           kinds:
-    #             - "monitoring.coreos.com/*/PrometheusRule"
-    #   exclude:
-    #     any:
-    #       - resources:
-    #           namespaces:
-    #             - "cdi"
-
-    #   mutate:
-    #     targets:
-    #       - kind: PrometheusRule
-    #         name: "{{ request.object.metadata.name }}"
-    #         namespace: "{{ request.object.metadata.namespace }}"
-    #     patchesJson6902: |-
-    #       - path: /metadata/labels/kyverno-test-label
-    #         op: add
-    #         value: test
+          - path: /spec/groups/0/rules/36/
+            op: remove
