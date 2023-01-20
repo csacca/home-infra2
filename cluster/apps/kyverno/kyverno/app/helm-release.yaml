@@ -24,7 +24,7 @@ spec:
       retries: 5
   values:
     installCRDs: true
-    replicaCount: 1
+    replicaCount: 1 # as of 1.9.0-rc.2 HA is broken with mutate rules see (https://github.com/kyverno/kyverno/issues/5848), should be fixed in 1.10
     serviceMonitor:
       enabled: true
 
