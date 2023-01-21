@@ -37,5 +37,5 @@ spec:
             name: "{{ request.object.metadata.name }}"
             namespace: "{{ request.object.metadata.namespace }}"
         patchesJson6902: |-
-          - path: /spec/groups/0/rules/36/
+          - path: /spec/groups/0/rules/36
             op: remove
