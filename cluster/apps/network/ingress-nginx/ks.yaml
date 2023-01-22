@@ -16,3 +16,4 @@ spec:
   wait: true
   dependsOn:
     - name: cluster-apps-cert-manager
+    - name: cluster-apps-cert-manager-issuers

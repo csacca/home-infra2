@@ -7,6 +7,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg-operator
   interval: 10m
   path: ./cluster/apps/monitoring/grafana/app
   prune: true
