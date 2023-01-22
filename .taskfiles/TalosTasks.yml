@@ -6,7 +6,8 @@ vars:
     sh: yq '.nodes[] | select(.controlPlane==true) | .ipAddress' provision/talos/talconfig.yaml | tr '\n' ',' | head -c -1
   NODE_IP:
     sh: echo '{{.NODE_IP_LIST}}' | tr ',' '\n' | head -n1
-
+  ALL_NODES:
+    sh: yq '.nodes[] | .ipAddress' provision/talos/talconfig.yaml | tr '\n' ',' | head -c -1
 tasks:
   genconfig:
     desc: Generate Talos machine configuration files
@@ -52,13 +53,14 @@ tasks:
     cmds:
       - kubectl kustomize --enable-helm ../cni | kubectl apply -f -
       - kubectl kustomize --enable-helm ../kubelet-csr-approver | kubectl apply -f -
+      - sleep 5
       - kubectl wait --for=condition=Ready nodes --all --timeout=600s
 
   wipe:
     desc: Wipe and reset talos cluster
     dir: provision/talos/clusterconfig
     cmds:
-      - talosctl --talosconfig talosconfig reset --graceful=false --reboot=true --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL --wait=false
+      - talosctl --talosconfig talosconfig reset --nodes {{.NODE_IP_LIST}} --graceful=false --reboot=true --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL --wait=false
 
   wipe-rook:
     desc: Fully wipe data disks in preparation for Ceph usage
