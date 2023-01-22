@@ -28,6 +28,7 @@ spec:
   dependsOn:
     - name: cluster-apps-rook-ceph-operator
     - name: cluster-apps-multus-config
+    - name: cluster-apps-ingress-nginx
   interval: 10m
   path: ./cluster/apps/rook-ceph/rook-ceph/cluster
   prune: true
