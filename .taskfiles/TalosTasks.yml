@@ -60,7 +60,7 @@ tasks:
     desc: Wipe and reset talos cluster
     dir: provision/talos/clusterconfig
     cmds:
-      - talosctl --talosconfig talosconfig reset --nodes {{.NODE_IP_LIST}} --graceful=false --reboot=true --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL --wait=false
+      - talosctl --talosconfig talosconfig reset --nodes {{.ALL_NODES}} --graceful=false --reboot=true --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL --wait=false
 
   wipe-rook:
     desc: Fully wipe data disks in preparation for Ceph usage
