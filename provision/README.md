@@ -34,7 +34,7 @@ task talos:genconfig
 task talos:tf-apply
 ```
 
-3. PXE boot nodes
+3. PXE boot nodes (or talos:wipe to reset cluster, still need matchbox up)
 
 ```bash
 task pxe:all
