@@ -11,4 +11,4 @@ resources:
   - ./kyverno
   - ./monitoring
   - ./network
-  - ./storage
+  - ./rook-ceph
