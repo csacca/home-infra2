@@ -217,7 +217,7 @@ spec:
 
     # -- Section for configuring optional Helm test
     test:
-      enabled: true
+      enabled: false
 
     # -- Monitoring section determines which monitoring features to enable
     monitoring:
