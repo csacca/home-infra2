@@ -221,16 +221,16 @@ spec:
 
     # -- Monitoring section determines which monitoring features to enable
     monitoring:
-      # serviceMonitor:
-      #   enabled: false
-      #   metricsInstance:
-      #     enabled: false
+      serviceMonitor:
+        enabled: false
+        metricsInstance:
+          enabled: false
       selfMonitoring:
         enabled: false
         grafanaAgent:
           installOperator: false
-      # lokiCanary:
-      #   enabled: false
+      lokiCanary:
+        enabled: false
 
 
   valuesFrom:
