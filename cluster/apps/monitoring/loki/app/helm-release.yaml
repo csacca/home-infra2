@@ -193,9 +193,9 @@ spec:
         - name: loki-tmp
           emptyDir: {}
 
-      persistence:
-        size: 10Gi
-        storageClass: ceph-block
+      # persistence:
+      #   size: 10Gi
+      #   storageClass: ceph-block
 
     # Configuration for the gateway
     gateway:
