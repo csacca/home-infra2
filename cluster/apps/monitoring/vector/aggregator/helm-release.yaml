@@ -17,9 +17,9 @@ spec:
       interval: 15m
 
   values:
-    image:
-      repository: docker.io/timberio/vector
-      tag: 0.27.0-debian
+    # image:
+    #   repository: docker.io/timberio/vector
+    #   tag: 0.27.0-debian
 
     role: "Stateless-Aggregator"
 
@@ -184,7 +184,7 @@ spec:
         cpu: 35m
         memory: 249M
       limits:
-        memory: 454M
+        memory: 2G
 
     service:
       enabled: true

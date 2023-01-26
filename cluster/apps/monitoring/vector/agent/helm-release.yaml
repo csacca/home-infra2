@@ -16,9 +16,9 @@ spec:
         namespace: flux-system
       interval: 30m
   values:
-    image:
-      repository: timberio/vector
-      tag: 0.27.0-debian
+    # image:
+    #   repository: timberio/vector
+    #   tag: 0.27.0-debian
 
     role: "Agent"
 
