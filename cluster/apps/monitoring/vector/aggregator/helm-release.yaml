@@ -95,7 +95,7 @@ spec:
         loki_kubernetes:
           type: loki
           inputs:
-            - kubernetes_logs
+            - kubernetes_logs_remap
           endpoint: http://loki-gateway.monitoring:80
           encoding:
             codec: json
