@@ -1,7 +1,9 @@
 ---
 clusterName: home-ops
-talosVersion: v1.3.1
-kubernetesVersion: v1.26.0
+# renovate: fixme
+talosVersion: v1.3.3
+# renovate: fixme
+kubernetesVersion: v1.26.1
 
 domain: ${clusterDomainName}
 endpoint: "https://home-ops.${mgmtDomainName}:6443"
@@ -61,6 +63,7 @@ nodes:
       machine:
         install:
           extensions:
+            # renovate: fixme
             - image: ghcr.io/siderolabs/intel-ucode:20221108
 
   - hostname: vega.${mgmtDomainName}
@@ -96,6 +99,7 @@ nodes:
       machine:
         install:
           extensions:
+            # renovate: fixme
             - image: ghcr.io/siderolabs/intel-ucode:20221108
 
   - hostname: capella.${mgmtDomainName}
@@ -131,6 +135,7 @@ nodes:
       machine:
         install:
           extensions:
+            # renovate: fixme
             - image: ghcr.io/siderolabs/intel-ucode:20221108
 
   - hostname: rigel.${mgmtDomainName}
@@ -164,6 +169,7 @@ nodes:
       machine:
         install:
           extensions:
+            # renovate: fixme
             - image: ghcr.io/siderolabs/intel-ucode:20221108
 
 controlPlane:

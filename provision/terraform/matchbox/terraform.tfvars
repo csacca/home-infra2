@@ -1,6 +1,7 @@
 matchbox_http_endpoint = "http://matchbox.example.com:8080"
 matchbox_rpc_endpoint  = "matchbox.example.com:8081"
-talos_version          = "v1.3.1"
+# renovate: fixme
+talos_version          = "v1.3.3"
 
 cluster_name = "home-ops"
 
