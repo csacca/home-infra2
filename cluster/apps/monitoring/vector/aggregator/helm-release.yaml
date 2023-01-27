@@ -17,10 +17,6 @@ spec:
       interval: 15m
 
   values:
-    # image:
-    #   repository: docker.io/timberio/vector
-    #   tag: 0.27.0-debian
-
     role: "Stateless-Aggregator"
 
     podAnnotations:
@@ -109,20 +105,18 @@ spec:
           remove_label_fields: true
           remove_timestamp: true
           labels:
-            k8s_app: >-
+            source: kubernetes_logs
+            app: >-
               {{`{{ custom_app_name }}`}}
-            # {{`{{ "kubernetes.pod_labels.app\.kubernetes\.io/name" }}`}}
-            k8s_container: >-
+            container: >-
               {{`{{ "kubernetes.container_name" }}`}}
-            k8s_filename: >-
+            filename: >-
               {{`{{ "kubernetes.file" }}`}}
-            # k8s_instance: >-
-            #   {{`{{ "kubernetes.pod_labels.app\.kubernetes\.io/instance" }}`}}
-            k8s_namespace: >-
+            namespace: >-
               {{`{{ "kubernetes.pod_namespace" }}`}}
-            k8s_node: >-
+            node: >-
               {{`{{ "kubernetes.pod_node_name" }}`}}
-            k8s_pod: >-
+            pod: >-
               {{`{{ "kubernetes.pod_name" }}`}}
 
         loki_journal:
@@ -138,6 +132,7 @@ spec:
           remove_label_fields: true
           remove_timestamp: true
           labels:
+            source: journal_logs
             hostname: >-
               {{`{{ host }}`}}
 
@@ -154,6 +149,7 @@ spec:
             max_bytes: 1048576
           out_of_order_action: rewrite_timestamp
           labels:
+            source: talos_kernel
             hostname: >-
               {{`{{ __host }}`}}
             service: >-
@@ -172,6 +168,7 @@ spec:
             max_bytes: 524288
           out_of_order_action: rewrite_timestamp
           labels:
+            source: talos_service
             hostname: >-
               {{`{{ __host }}`}}
             service: >-
