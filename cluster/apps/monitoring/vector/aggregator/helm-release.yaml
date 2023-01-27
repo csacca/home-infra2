@@ -30,7 +30,8 @@ spec:
       data_dir: /vector-data-dir
 
       api:
-        enabled: false
+        enabled: true
+        address: 0.0.0.0:8686
 
       # Sources
       sources:
@@ -82,6 +83,7 @@ spec:
             .__host, .err = replace(.__host, "10.99.1.100", "polaris")
             .__host = replace(.__host, "10.99.1.101", "vega")
             .__host = replace(.__host, "10.99.1.102", "capella")
+            .__host = replace(.__host, "10.99.1.103", "rigel")
         talos_service_logs_xform:
           type: remap
           inputs:
@@ -90,6 +92,7 @@ spec:
             .__host, .err = replace(.__host, "10.99.1.100", "polaris")
             .__host = replace(.__host, "10.99.1.101", "vega")
             .__host = replace(.__host, "10.99.1.102", "capella")
+            .__host = replace(.__host, "10.99.1.103", "rigel")
 
       # Sinks
       sinks:
@@ -101,7 +104,7 @@ spec:
           encoding:
             codec: json
           batch:
-            max_bytes: 400000
+            max_bytes: 2049000
           out_of_order_action: rewrite_timestamp
           remove_label_fields: true
           remove_timestamp: true
@@ -166,7 +169,7 @@ spec:
             except_fields:
               - __host
           batch:
-            max_bytes: 400000
+            max_bytes: 524288
           out_of_order_action: rewrite_timestamp
           labels:
             hostname: >-
