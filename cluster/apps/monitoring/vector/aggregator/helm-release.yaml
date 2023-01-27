@@ -109,15 +109,15 @@ spec:
             app: >-
               {{`{{ custom_app_name }}`}}
             container: >-
-              {{`{{ "kubernetes.container_name" }}`}}
+              {{`{{ kubernetes.container_name }}`}}
             filename: >-
-              {{`{{ "kubernetes.file" }}`}}
+              {{`{{ kubernetes.file }}`}}
             namespace: >-
-              {{`{{ "kubernetes.pod_namespace" }}`}}
+              {{`{{ kubernetes.pod_namespace }}`}}
             node: >-
-              {{`{{ "kubernetes.pod_node_name" }}`}}
+              {{`{{ kubernetes.pod_node_name }}`}}
             pod: >-
-              {{`{{ "kubernetes.pod_name" }}`}}
+              {{`{{ kubernetes.pod_name }}`}}
 
         loki_journal:
           type: loki
