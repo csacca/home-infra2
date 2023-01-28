@@ -67,3 +67,12 @@ tasks:
     cmds:
       - kubectl apply -f ./cluster/tools/wipe-rook.yaml
       - kubectl wait job --for=condition=complete -l job-type=disk-wipe -n kube-system --timeout=120s
+
+  rolling-reboot:
+    desc: Reboot cluster one node at a time
+    dir: provision/talos/clusterconfig
+    cmds:
+      - talosctl --talosconfig talosconfig reboot --nodes 10.99.1.100
+      - talosctl --talosconfig talosconfig reboot --nodes 10.99.1.101
+      - talosctl --talosconfig talosconfig reboot --nodes 10.99.1.102
+      - talosctl --talosconfig talosconfig reboot --nodes 10.99.1.103
