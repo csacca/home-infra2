@@ -21,6 +21,9 @@ spec:
       repository: ghcr.io/miguelndecarvalho/speedtest-exporter
       tag: v3.5.3
 
+    env:
+      SPEEDTEST_SERVER: "29094"
+
     resources:
       requests:
         cpu: 15m
