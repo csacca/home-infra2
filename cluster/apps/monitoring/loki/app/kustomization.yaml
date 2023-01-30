@@ -6,3 +6,4 @@ resources:
   - ./objectbucketclaim.yaml
   - ./configmap.yaml
   - ./helm-release.yaml
+  - ./prometheus-rule.yaml
