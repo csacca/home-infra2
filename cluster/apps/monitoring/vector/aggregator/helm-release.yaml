@@ -68,9 +68,10 @@ spec:
           type: remap
           inputs:
             - kubernetes_logs
-          source: |
+          source: |-
             # Standardize 'app' index
-            .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+            .app = .kubernetes.pod_labels."app.kubernetes.io/name" || .kubernetes.pod_labels.app || .kubernetes.pod_labels."k8s-app" || .kubernetes.pod_name
+
         talos_kernel_logs_xform:
           type: remap
           inputs:
@@ -107,7 +108,7 @@ spec:
           labels:
             source: kubernetes_logs
             app: >-
-              {{`{{ custom_app_name }}`}}
+              {{`{{ .app }}`}}
             container: >-
               {{`{{ kubernetes.container_name }}`}}
             filename: >-

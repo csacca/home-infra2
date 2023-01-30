@@ -33,8 +33,14 @@ spec:
 
       # Sources
       sources:
+        journal_logs:
+          type: journald
+          journal_directory: /var/log/journal
+
         kubernetes_logs:
           type: kubernetes_logs
+          glob_minimum_cooldown_ms: 5000
+          auto_partial_merge: true
 
         talos_kernel_logs:
           type: socket
@@ -53,6 +59,13 @@ spec:
           inputs:
             - kubernetes_logs
           address: "vector-aggregator.monitoring:6000"
+          version: "2"
+
+        journal_sink:
+          type: vector
+          inputs:
+            - journal_logs
+          address: "vector-aggregator.monitoring:6002"
           version: "2"
 
         talos_kernel_sink:
