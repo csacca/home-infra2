@@ -108,7 +108,7 @@ spec:
           labels:
             source: kubernetes_logs
             app: >-
-              {{`{{ .app }}`}}
+              {{`{{ app }}`}}
             container: >-
               {{`{{ kubernetes.container_name }}`}}
             filename: >-
